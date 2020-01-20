@@ -1,41 +1,69 @@
 #!/usr/bin/python
 
+# Article:  https://en.wikipedia.org/wiki/Quicksort
+
+#
 # Ways to choose pivot
 #    1. The first element
 #    2. The last element
 #    3. The medium element
 #
 # Get position which (the number at the position NEED NOT be the pivot):
-#     the left part <= pivot
-#     the right part >= pivot
+#     the low part <= pivot
+#     the high part >= pivot
 #
 
-def quick_sort(numbers,left,right):
-    if left<right:
-        index=partition(numbers,left,right)
-        quick_sort(numbers,left,index-1)
-        quick_sort(numbers,index,right)
 
-# must use 'numbers[left]<pivot' and 'numbers[right]>pivot',
+# Solution 1:  use midium element as pivot
+
+def quick_sort1(nums,low,high):
+    if low<high:
+        index=partition1(nums,low,high)
+        quick_sort1(nums,low,index-1)
+        quick_sort1(nums,index,high)
+
+# must use 'nums[low]<pivot' and 'nums[high]>pivot',
 # otherwise, loop infinite.
 
-def partition(numbers,left,right):
-    pivot=numbers[(left+right)//2]
-    while left<=right:
-        while numbers[left]<pivot:
-            left+=1
-        while numbers[right]>pivot:
-            right-=1
-        if left<=right:
-            numbers[left],numbers[right]=numbers[right],numbers[left]
-            left+=1
-            right-=1
-    return left;
+def partition1(nums,low,high):
+    pivot=nums[(low+high)//2]
+    while low<=high:
+        while nums[low]<pivot:
+            low+=1
+        while nums[high]>pivot:
+            high-=1
+        if low<=high:
+            nums[low],nums[high]=nums[high],nums[low]
+            low+=1
+            high-=1
+    return low;
+
+
+# Solution 2: use last element as pivot
+
+def quick_sort2(nums,low,high):
+    if low<high:
+        index=partition2(nums,low,high)
+        quick_sort2(nums,low,index-1)
+        quick_sort2(nums,index+1,high)
+
+def partition2(nums,low,high):
+    pivot=nums[high]
+    i=low
+    for j in range(low,high):
+        if nums[j]<pivot:
+            nums[i],nums[j]=nums[j],nums[i]
+            i+=1
+    nums[i],nums[high]=nums[high],nums[i]
+    return i
+
 
 if __name__ == '__main__':
-    numbers=[ 21, 14, 6, 51, 23, 7, 25, 23, 22, 33, 6, 44, 23, 15, 51, 76 ]
-    length=len(numbers)
-    print("numbers: ", numbers)
-    quick_sort(numbers, 0, length-1)
-    print("numbers after quick sort: ", numbers)
+    nums=[ 21, 14, 6, 51, 23, 7, 25, 23, 22, 33, 6, 44, 23, 15, 51, 76 ]
+    nums1=nums[:]
+    print("nums: ", nums)
+    quick_sort1(nums, 0, len(nums)-1)
+    print("nums after quick sort with midium element as pivot: ", nums)
 
+    quick_sort2(nums1, 0, len(nums1)-1)
+    print("nums after quick sort with last element as pivot:   ", nums1)
