@@ -38,7 +38,7 @@ class MaxHeap:
         return self.array.pop()
 
     def get_max(self):
-        l = len(self.array):
+        l = len(self.array)
         return self.array[0] if l>0 else None
 
     def swap(self, i, j):
@@ -55,7 +55,8 @@ class MaxHeap:
         p = self.parent(k)
         while k > 0 and self.array[p] < self.array[k]:
             self.swap(p, k)
-            k, p = p, self.parent(k)
+            k = p
+            p = self.parent(k)
 
     # Down
     def sink(self, k):
