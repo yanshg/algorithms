@@ -3,7 +3,7 @@
 def binary_search(nums, search_num):
     low,high=0,len(nums)-1
     while (low <= high):
-        mid=(low+high)//2
+        mid=low+(high-low)//2
         mid_num=nums[mid]
         if search_num == mid_num:
            return mid
