@@ -26,12 +26,12 @@ class MaxHeap:
         for v in arr:
             self.heappush(v)
 
-    # Append and swim
+    # Append and swim up
     def heappush(self, v):
         self.array.append(v)
         self.swim(len(self.array) - 1)
 
-    # Swap the last item with the first, and then sink
+    # Swap the last item with the first, and then sink down
     def heappop(self):
         self.swap(0, len(self.array) - 1)
         self.sink(0)
@@ -58,7 +58,7 @@ class MaxHeap:
             k = p
             p = self.parent(k)
 
-    # Down
+    # Down, compare with bigger child
     def sink(self, k):
         l = len(self.array)
         assert k < l
