@@ -26,7 +26,7 @@ def quick_sort1(nums,low,high):
 # otherwise, loop infinite.
 
 def partition1(nums,low,high):
-    pivot=nums[(low+high)//2]
+    pivot=nums[low + (high-low)//2]
     while low<=high:
         while nums[low]<pivot:
             low+=1
@@ -49,13 +49,13 @@ def quick_sort2(nums,low,high):
 
 def partition2(nums,low,high):
     pivot=nums[high]
-    i=low
-    for j in range(low,high):
-        if nums[j]<pivot:
-            nums[i],nums[j]=nums[j],nums[i]
-            i+=1
-    nums[i],nums[high]=nums[high],nums[i]
-    return i
+    mid=low
+    for i in range(low,high):
+        if nums[i]<pivot:
+            nums[mid],nums[i]=nums[i],nums[mid]
+            mid+=1
+    nums[mid],nums[high]=nums[high],nums[mid]
+    return mid
 
 
 if __name__ == '__main__':
