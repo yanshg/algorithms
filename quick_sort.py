@@ -47,6 +47,11 @@ def quick_sort2(nums,low,high):
         quick_sort2(nums,low,index-1)
         quick_sort2(nums,index+1,high)
 
+
+#  |    <pivot   |               |
+#  |-|-----------|-|-----------|-|
+#  low           mid           high
+#
 def partition2(nums,low,high):
     pivot=nums[high]
     mid=low
