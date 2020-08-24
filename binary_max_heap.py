@@ -38,44 +38,43 @@ class MaxHeap:
         return self.array.pop()
 
     def get_max(self):
-        l = len(self.array)
-        return self.array[0] if l>0 else None
+        return self.array[0] if len(self.array)>0 else None
 
     def swap(self, i, j):
         l = len(self.array)
         assert i < l and j < l
-
         self.array[i],self.array[j]=self.array[j],self.array[i]
 
     def less(self, i, j):
-        return self.array[i] < self.array[j]
+        l = len(self.array)
+        assert i < l and j < l
+        return self.array[i] <= self.array[j]
 
     # Up
     def swim(self, k):
-        p = self.parent(k)
-        while k > 0 and self.array[p] < self.array[k]:
-            self.swap(p, k)
-            k = p
+        while k > 0:
             p = self.parent(k)
+            if self.less(k, p):
+                break
+
+            self.swap(k, p)
+            k = p
 
     # Down, compare with bigger child
     def sink(self, k):
         l = len(self.array)
-        assert k < l
+        while k < l:
+            left_c, right_c = self.left_child(k), self.right_child(k)
 
-        left_c, right_c = self.left_child(k), self.right_child(k)
-        while left_c < l:
             bigger = left_c
             if right_c < l and self.less(left_c, right_c):
                 bigger = right_c
 
-            if self.less(bigger, k):
+            if bigger >= l or self.less(bigger, k):
                 break
 
-            self.swap(k, bigger)
+            self.swap(bigger, k)
             k = bigger
-            left_c, right_c = self.left_child(k), self.right_child(k)
-
 
 mh=MaxHeap([3,2,6,5,4,1])
 assert mh.heappop() == 6
