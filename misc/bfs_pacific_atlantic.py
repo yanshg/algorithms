@@ -29,7 +29,7 @@ def pacific_atlantic(matrix):
     def bfs(vset):
         dq = deque(list(vset))
         while dq:
-            r,c=dq.popleft()
+            r,c = dq.popleft()
             for dr,dc in [(0,1),(0,-1),(1,0),(-1,0)]:
                 nr,nc = r+dr,c+dc
                 if 0<=nr<rows and 0<=nc<cols and \
