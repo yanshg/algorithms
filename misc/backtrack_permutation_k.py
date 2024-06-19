@@ -22,6 +22,6 @@ def get_permutation_k(k):
     backtrack(k, nums, [], res)
     return res
 
-print(get_permutation_k(3))
+print(get_permutation_k(2))
 
     

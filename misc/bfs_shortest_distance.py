@@ -40,19 +40,17 @@ def get_shortest_distance(grid):
     distances = [ [0 for j in range(n) ] for i in range(m) ]
     reach = [ [0 for j in range(n) ] for i in range(m) ]
     
-    def dfs(grid, start, reach, distances):
+    # calculate reach and distances for each start point
+    def bfs(grid, start, reach, distances):
         visited = [ [ False for j in range(n) ] for i in range(m) ]
         directions = [ [0, 1], [0, -1], [1, 0], [-1, 0]]
         
         level = 0
         dq = deque([ start ])
         while dq:
-            k = 0
-            l = len(dq)
             print(dq)
-            while k < l:
+            for _ in range(len(dq)):
                 (i, j) = dq.popleft()
-                k += 1
                 if visited[i][j]:
                     continue
 
@@ -70,7 +68,7 @@ def get_shortest_distance(grid):
 
     for start in starts:
         print(start)
-        dfs(grid, start, reach, distances)
+        bfs(grid, start, reach, distances)
     
     min_distance = m + n
     for i in range(m):

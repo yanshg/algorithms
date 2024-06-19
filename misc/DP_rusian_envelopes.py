@@ -1,9 +1,8 @@
 
 
 class Solution1:
-    def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
-        envelopes.sort(key=lambda x: (x[0], -x[1]))
-        
+    def maxEnvelopes(self, envelopes: list[list[int]]) -> int:
+        envelopes.sort(key=lambda x: (x[0], -x[1]))        
         heights = list(map(lambda x: x[1], envelopes))
         
         # LIS 
@@ -19,7 +18,7 @@ class Solution1:
 
 
 class Solution2:
-    def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
+    def maxEnvelopes(self, envelopes: list[list[int]]) -> int:
         # LIS
         def lis(nums):
             res = 1
@@ -54,11 +53,13 @@ class Solution3:
 
         tops = []
         for w, h in envelopes:
-            idx = bisect.bisect_left(tops, h)
+            idx = bisect.bisect_right(tops, h)
             if idx == len(tops):
                 tops += [ h ]
             else:
                 tops[idx] = h
         return len(tops)
 
-
+solution = Solution3()
+envelopes = [ [2, 3], [3, 4], [3, 2]]
+print(solution.maxEnvelopes(envelopes))

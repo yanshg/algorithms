@@ -80,8 +80,7 @@ class UF:
         if len(words1) != len(words2):
             return False
         
-        for i, w1 in enumerate(words1):
-            w2 = words2[i]
+        for w1, w2 in zip(words1, words2):
             if not self.is_similar_word(w1, w2):
                 # if not similar, return False
                 return False

@@ -17,6 +17,20 @@ def inorder(root):
             yield curr.val
             curr = curr.right
 
+def inorder2(root):
+    stack = []
+    curr = root
+
+    while curr or stack:
+        while curr:
+            stack.append(curr)
+            curr = curr.left
+        
+        if stack:
+            curr = stack.pop()
+            yield curr.val
+            curr = curr.right
+
 def preorder(root):
     stack = []
     curr = root
@@ -54,6 +68,7 @@ root.left.right = Node(5)
 root.right.left = Node(6)
 root.right.right = Node(7)
 print("inorder: ", list(inorder(root)))
+print("inorder2: ", list(inorder2(root)))
 print("preorder: ", list(preorder(root)))
 print("postorder: ", list(postorder(root)))
 

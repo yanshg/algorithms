@@ -4,7 +4,13 @@ Given a positive integer n, find the least number of perfect square numbers (for
 For example, given n=12, return 3 because 12 = 4 + 4 + 4; given n=13, return 2 because 13 = 4 + 9.
 
 '''
-import math
+
+
+# f(n) = min (1 + f(n - i * i)) for i in [1, sqrt(n)]
+
+# base cases: 
+#    f(0) = 0
+#    f(1) = 1
 
 def get_perfect_square(n):
     if n <= 0:

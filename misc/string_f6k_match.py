@@ -18,12 +18,11 @@ def match(s, p):
         # Handle the current letter or number for both s and p
         cs, cp = s[i], p[j]
         if cp.isdigit():
-            num += num * 10 + int(p[j])
+            num = int(cp)
             while j+1 < lp and p[j+1].isdigit():
-                j += 1
-                num += num * 10 + int(p[j])                
+                num += num * 10 + int(p[j+1])  
+                j += 1              
             i += num - 1
-            num = 0
         elif cs != cp:
             return False
 

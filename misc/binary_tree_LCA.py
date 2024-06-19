@@ -13,16 +13,19 @@ def get_parents(root, p, q):
     parents = {}
 
     # use bfs to get parent for p and q
-    dq = deque([(root, None)])
+    dq = deque([(root)])
+    parents[root] = None
+
     while dq and (p not in parents or q not in parents):
-        node, parent = dq.popleft()
-        parents[node] = parent
+        node = dq.popleft()
 
         if node.left:
-            dq.append((node.left, node))
+            dq.append((node.left))
+            parents[node.left] = node
 
         if node.right:
-            dq.append((node.right, node))
+            dq.append((node.right))
+            parents[node.right] = node
     
     return parents
 
