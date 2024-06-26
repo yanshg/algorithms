@@ -4,9 +4,8 @@ Given a strings, partitions such that every substring of the partition is a pali
 Return all possible palindrome partitioning of s.
 
 For example, givens="aab",
-Return
 
-Copy
+Return
 [
   ["aa","b"],
   ["a","a","b"]
@@ -39,10 +38,29 @@ def get_palindrome_partitions(s):
                 backtrack(s, isPalindrome, i+1, path, res)
                 path.pop()
 
+    def dfs_with_memo(s, isPalindrome, start, memo = {}):
+        if start == l:
+            return [[]]
+        
+        if start in memo:
+            return memo[start]
+        
+        res = []
+        for i in range(start, l):
+            if isPalindrome[start][i]:
+                res += [ [s[start:i+1]] + items for items in dfs_with_memo(s, isPalindrome, i+1, memo) ]
+        memo[start] = res
+        return res
+    
     res = []
+    memo = {}
     isPalindrome = get_palindrome_state(s)
     print(isPalindrome)
+
+    #result = dfs_with_memo(s, isPalindrome, 0, {})
+    #return result
+
     backtrack(s, isPalindrome, 0, [], res)
     return res
 
-print(get_palindrome_partitions('aab'))
+print(get_palindrome_partitions('aabb'))

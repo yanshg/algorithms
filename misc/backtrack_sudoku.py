@@ -7,7 +7,7 @@ You may assume that there will be only one unique solution.
 '''
 
 def solve_sudoku(board):
-    m, n = len(board), len(board[0])
+    rows, cols = len(board), len(board[0])
 
     def is_valid(board, row, col, num):
         for i in range(9):
@@ -17,22 +17,28 @@ def solve_sudoku(board):
                 return False
         return True
         
-    def backtrack(board):
-        for i in range(m):
-            for j in range(n):
-                if board[i][j] == '.':
-                    print(i, j)
-                    for c in '123456789':
-                        if is_valid(board, i, j, c):
-                            board[i][j] = c
-                            if backtrack(board):
-                                print(board)
-                                return True
-                            board[i][j] = '.'
-                    return False
-        return True
+    def backtrack(board, row = 0, col = 0):
+        if row == rows:
+            print(board)
+            return True
+        
+        if col == cols:
+            return backtrack(board, row + 1, 0)
+
+        if board[row][col] != '.':
+            return backtrack(board, row, col + 1)
+
+        # board[row][col] == '.'
+        for c in '123456789':
+            if is_valid(board, row, col, c):
+                board[row][col] = c
+                if backtrack(board, row, col + 1):
+                    return True
+                board[row][col] = '.'
+        
+        return False
     
-    return backtrack(board)
+    return backtrack(board, 0, 0)
     
 board = [
     ['7', '8', '.', '4', '.', '.', '1', '2', '.' ],

@@ -1,3 +1,67 @@
+'''
+L.index(value, [start, [stop]]) -> integer -- return first index of value
+
+Return zero-based index in the list of the first item whose value is equal to x. 
+Raises a ValueError if there is no such item.
+
+'''
+
+
+def all_indices(value, qlist):
+    indices = []
+    idx = -1
+    while True:
+        try:
+            idx = qlist.index(value, idx+1)
+            indices.append(idx)
+        except ValueError:
+            break
+    return indices
+
+all_indices("foo", ["foo","bar","baz","foo"])
+
+
+
+'''
+defaultdict(int)
+
+The function int() which always returns zero is just a special case of constant functions. A faster and more flexible way to create constant functions is to use a lambda function which can supply any constant value (not just zero):
+
+>>>
+def constant_factory(value):
+    return lambda: value
+
+d = defaultdict(constant_factory('<missing>'))
+d.update(name='John', action='ran')
+'%(name)s %(action)s to %(object)s' % d
+'John ran to <missing>'
+'''
+
+from collections import defaultdict
+
+# min_eliminations is dict structure with { (y, x): k + 1 }
+# initially with { (0,0): 0 }
+min_eliminations = defaultdict(lambda: k + 1, {(0,0): 0})
+min_eliminations[(0,1)] = 2
+
+'''
+Integers and Floating-Point Numbers
+The abs() function is one of the built-in functions that are part of the Python language. That means you can start using it right away without importing:
+'''
+
+
+abs(-12)
+abs(-12.0)
+
+
+
+s = 'a'
+
+# s[0:] will be 'a'
+# s[1:] will be ''
+# s[2:] will be '',    NO EXCEPTION happen
+s[0:]
+s[2:]
 
 points = [ (1, 11), (2, 21), (3, 31), (4, 41) ]
 xs, ys = list(zip(*points))
