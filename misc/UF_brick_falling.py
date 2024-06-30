@@ -105,8 +105,6 @@ def connect_top_bricks(uf, grid):
                         uf.union((i, j), (i, j-1))
                     if grid[i][j] == grid[i-1][j]:
                         uf.union((i, j), (i-1, j))
-    print("grid: ", grid)
-    print("uf: ", uf.size)
 
 def get_falling_bricks(grid, hits):
     if not grid:

@@ -18,19 +18,22 @@ Example 2:
 
 from collections import defaultdict
 
-class Solution:
-    def lengthOfLongestSubstring(self, s: str) -> int:
-        window = defaultdict(int)
-        max_len = 0
-        left = 0
-        for right,c in enumerate(s):
-            window[c] += 1
-            while left<=right and window[c] > 1:
-                window[s[left]] -= 1
-                left += 1
-            max_len = max(max_len, right - left + 1)
-        return max_len
-                
+def get_longest_distinct_chars(s: str) -> int:
+    window = defaultdict(int)
+    max_len = 0
 
-solution = Solution()
-assert solution.lengthOfLongestSubstring('abcabcbb') == 3
+    left = 0
+    for right,c in enumerate(s):
+        window[c] += 1
+
+        while left<=right and window[c] > 1:
+            lc = s[left]
+            window[lc] -= 1
+            left += 1
+
+        max_len = max(max_len, right - left + 1)
+
+    return max_len
+                
+s = 'abcabcbb'
+assert get_longest_distinct_chars(s) == 3

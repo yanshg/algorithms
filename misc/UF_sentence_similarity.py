@@ -42,6 +42,7 @@ class UF:
         for w1, w2 in pairs:
             self.union(w1, w2)
 
+    # First implement find()
     def find(self, w):
         if w not in self.word_to_index:
             return -1
@@ -52,10 +53,11 @@ class UF:
             p = self.parent[p]
         return p
 
+    # Then implement union()
     def union(self, w1, w2):
         root1 = self.find(w1)
         root2 = self.find(w2)
-        if root1 == root2 or root1 == -1 or root2 == -1:
+        if root1 == -1 or root2 == -1 or root1 == root2:
             return
         
         if self.size[root1] > self.size[root2]:
