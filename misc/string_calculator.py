@@ -18,7 +18,7 @@ def calculator(s):
         while len(slist) > 0:
             c = slist.popleft()
             if c.isdigit():
-                num += num * 10 + int(c)
+                num = num * 10 + int(c)
             if c == '(':
                 num = helper(slist)
             if c in "+-*/)" or len(slist) == 0:
@@ -80,21 +80,25 @@ def calculator1(s):
             if c.isdigit():
                 num = int(c)
                 while i+1 < n and slist[i+1].isdigit():
-                    num += num * 10 + int(slist[i+1])
+                    num = num * 10 + int(slist[i+1])
                     i += 1
                 nums.append(num)
             elif c == '(':
                operators.append(c)
             elif c in "+-*/":
+                # calculate the precedent operator
                 if operators and has_precedence(c, operators[-1]) and len(nums) >= 2:
                     nums.append(calculate(operators.pop(), nums.pop(), nums.pop()))
                 operators.append(c)
             elif c == ')':
+                # calculate the operators until get to '('
                 while operators and operators[-1] != '(' and len(nums) >= 2:
                     nums.append(calculate(operators.pop(), nums.pop(), nums.pop()))
+                # pop last operator '('
                 operators.pop()
             i += 1
 
+        # calculate the remaining operators
         while operators and len(nums) >= 2:
             nums.append(calculate(operators.pop(), nums.pop(), nums.pop()))
 

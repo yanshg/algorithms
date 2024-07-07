@@ -62,13 +62,9 @@ def get_lca_binary_tree(root, p, q):
     
     return left if left else right
 
-root = Node(1)
-root.left = Node(2)
-root.right = Node(3)
-p = root.left.left = Node(4)
-root.left.right = Node(5)
-root.right.left = Node(6)
-q = root.right.right = Node(7)
+root = Node(1, Node(2, Node(4), Node(5)), Node(3, Node(6), Node(7)))
+p = root.left.left
+q = root.right.right
 
 print("root", root)
 print("lca: ",  get_lca(root, p, q))    

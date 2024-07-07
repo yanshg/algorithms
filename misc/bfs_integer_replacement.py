@@ -1,5 +1,5 @@
 '''
-Given a positive integern and you can do operations as follow:
+Given a positive integer n and you can do operations as follow:
 
 If n is even, replace n with n/2.
 
