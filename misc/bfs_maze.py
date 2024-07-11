@@ -67,6 +67,7 @@ def maze(matrix, start, dest) -> bool:
                 prev = current
                 current = get_next_point(current, direction)
 
+            # if prev is start, means start's next point is not valid
             if not get_to_dest and prev and prev != start:
                 res += [ (direction, prev) ]
         
@@ -87,7 +88,7 @@ def maze(matrix, start, dest) -> bool:
             visited.add(point)
             for direction, neigh in get_neighbor_or_dest_point(matrix, point, dest):
                 if neigh not in visited:
-                    dq.append((neigh, directions[:] + [direction]))        
+                    dq.append((neigh, directions + [direction]))        
         return
 
     def dfs(matrix, start, dest, directions, visited=set(), res=[]):

@@ -33,7 +33,7 @@ Given n = 6,edges = [[0, 3], [1, 3], [2, 3], [4, 3], [5, 4]]
 
 Copy
      0  1  2
-      \ | /
+      \\ | /
         3
         |
         4
@@ -62,7 +62,7 @@ def get_minimum_height_tree_roots(graph):
     
     # remove leaf nodes from graph level by level, until only 1 or 2 nodes left.
     while dq and len(graph) > 2:
-        for k in range(len(dq)):
+        for _ in range(len(dq)):
             i = dq.popleft()
             del graph[i]
 
@@ -72,7 +72,7 @@ def get_minimum_height_tree_roots(graph):
                     if len(graph[j]) == 1:
                         dq.append(j)
 
-    return graph.keys()
+    return list(graph.keys())
 
 n = 4
 edges = [[1, 0], [1, 2], [1, 3]]

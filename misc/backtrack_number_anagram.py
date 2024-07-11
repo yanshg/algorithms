@@ -12,16 +12,16 @@ Given this string, return the original integers in sorted order. In the example 
 from collections import Counter
 
 def get_anagram_numbers(s):
-    mapping = { 0: 'zero',
-                1: 'one',
-                2: 'two',
-                3: 'three',
-                4: 'four',
-                5: 'five',
-                6: 'six',
-                7: 'seven',
-                8: 'eight',
-                9: 'nine',
+    mapping = { '0': 'zero',
+                '1': 'one',
+                '2': 'two',
+                '3': 'three',
+                '4': 'four',
+                '5': 'five',
+                '6': 'six',
+                '7': 'seven',
+                '8': 'eight',
+                '9': 'nine',
                 }
     
     def is_contained(counts, num_str_counts):
@@ -32,8 +32,7 @@ def get_anagram_numbers(s):
 
     def backtrack(counts, path = []):
         if not counts:
-            #return ''.join(map(str,sorted(path)))
-            return ''.join(map(str,path))
+            return ''.join(path)
         
         for num, num_str in mapping.items():
             num_counts = Counter(num_str)
@@ -43,6 +42,8 @@ def get_anagram_numbers(s):
                 if res:
                     return res
                 path.pop()
+        
+        return ''
     
     counts = Counter(s)
     return backtrack(counts, [])

@@ -63,6 +63,33 @@ s = 'a'
 s[0:]
 s[2:]
 
+s = 'help'
+s.upper()
+s.lower()
+
+import re
+
+def soundex(name):
+    name=re.sub(r'ck','c',name)
+    name=re.sub(r'cs','c',name)
+    first=name[0]
+    name=name[1:]
+    name=re.sub(r'[aoeuiywh]','',name)
+    name=re.sub(r'[bfpv]','1',name)
+    name=re.sub(r'[cgjkqsxz]','2',name)
+    name=re.sub(r'[dt]','3',name)
+    name=re.sub(r'l','4',name)
+    name=re.sub(r'[mn]','5',name)
+    name=re.sub(r'r','6',name)
+
+    name=(first+name)[:4]
+    return "{:0<4}".format(name)
+
+
+# must add () for operation << 
+depth = 2
+(1<<depth) - 1
+
 points = [ (1, 11), (2, 21), (3, 31), (4, 41) ]
 xs, ys = list(zip(*points))
 print("xs: ", xs, "ys: ", ys)

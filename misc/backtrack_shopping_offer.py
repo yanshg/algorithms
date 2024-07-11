@@ -48,7 +48,7 @@ You are not allowed to buy more items than you want, even if that would lower th
 
 '''
 
-def get_shopping_offers(prices, specials, targets, costs = []):
+def get_shopping_offers(prices, specials, targets):
     min_cost = float('inf')
 
     def is_special_applicable(targets, special):
@@ -60,7 +60,7 @@ def get_shopping_offers(prices, specials, targets, costs = []):
     def reduce_target(targets, special):
         return [ t-s for t, s in zip(targets, special)]
 
-    def dfs(prices, specials, targets, costs):
+    def dfs(prices, specials, targets, costs = []):
         nonlocal min_cost
 
         is_any_special_applicable = False
@@ -84,7 +84,7 @@ def get_shopping_offers(prices, specials, targets, costs = []):
             min_cost = min(min_cost, sum(costs))
 
     dfs(prices, specials, targets, [])
-    return min_cost
+    return min_cost if min_cost != float('inf') else -1
 
 prices = [2,5]
 specials = [[3,0,4], [1,2,10]]
