@@ -67,6 +67,15 @@ s = 'help'
 s.upper()
 s.lower()
 
+from collections import Counter
+
+c = Counter(a=2, b=-4)
++c
+Counter({'a': 2})
+-c
+Counter({'b': 4})
+
+
 import re
 
 def soundex(name):
