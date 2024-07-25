@@ -29,7 +29,7 @@ def merge_k_lists(lists):
     hq = []
     for head in lists:
         if head:
-            heapq.heappush(hq, (head.val, head))
+            heapq.heappush(hq, head)
 
     # pop item from heap and append it to result list
     # and push item's next into heap
@@ -38,15 +38,14 @@ def merge_k_lists(lists):
     p = dummy
 
     while hq:
-        val, head = heapq.heappop(hq)
+        head = heapq.heappop(hq)
         p.next = head
         p = p.next
 
         head = head.next
         if head:
-            heapq.heappush(hq, (head.val, head))
+            heapq.heappush(hq, head)
 
-    p.next = None
     return dummy.next
 
 

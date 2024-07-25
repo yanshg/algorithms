@@ -25,6 +25,6 @@ def get_min_size_subarray_sum(nums, s):
     
     return min_len if min_len != float('inf') else 0
 
-nums = [2,3,1,2,4,3,7]
+nums = [2,3,1,2,4,3]
 s = 7
 print(get_min_size_subarray_sum(nums, s))

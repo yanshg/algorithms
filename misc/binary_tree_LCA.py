@@ -13,18 +13,18 @@ def get_parents(root, p, q):
     parents = {}
 
     # use bfs to get parent for p and q
-    dq = deque([(root)])
+    dq = deque([root])
     parents[root] = None
 
     while dq and (p not in parents or q not in parents):
         node = dq.popleft()
 
         if node.left:
-            dq.append((node.left))
+            dq.append(node.left)
             parents[node.left] = node
 
         if node.right:
-            dq.append((node.right))
+            dq.append(node.right)
             parents[node.right] = node
     
     return parents
@@ -61,6 +61,7 @@ def get_lca_binary_tree(root, p, q):
         return root
     
     return left if left else right
+
 
 root = Node(1, Node(2, Node(4), Node(5)), Node(3, Node(6), Node(7)))
 p = root.left.left
