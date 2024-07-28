@@ -2,13 +2,13 @@
 
 import heapq
 
-def dijstra_distances(graph,start):
-    distances={ vertice:float('inf') for vertice in graph }
-    distances[start] =0
+def dijstra_distances(graph, start):
+    distances = { vertice:float('inf') for vertice in graph }
+    distances[start] = 0
 
-    hq = [(0,start)]
+    hq = [(0, start)]
     while hq:
-        current_distance,current_vertice = heapq.heappop(hq)
+        current_distance, current_vertice = heapq.heappop(hq)
 
         # Nodes can get added to the priority queue multiple times. We only
         # process a vertice the first time we remove it from the priority queue.

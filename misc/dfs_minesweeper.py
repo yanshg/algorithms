@@ -1,5 +1,11 @@
 '''
-You are given a 2D char matrix representing the game board.'M' represents an unrevealed mine,'E' represents an unrevealed empty square,'B' represents a revealed blank square that has no adjacent (above, below, left, right, and all 4 diagonals) mines,digit ('1' to '8') represents how many mines are adjacent to this revealed square, and finally 'X' represents a revealed mine.
+You are given a 2D char matrix representing the game board.
+
+'M' represents an unrevealed mine,
+'E' represents an unrevealed empty square,
+'B' represents a revealed blank square that has no adjacent (above, below, left, right, and all 4 diagonals) mines,
+digit ('1' to '8') represents how many mines are adjacent to this revealed square, 
+and finally 'X' represents a revealed mine.
 
 Now given the next click position (row and column indices) among all the unrevealed squares ('M' or 'E'), return the board after revealing this position according to the following rules:
 
@@ -58,7 +64,7 @@ Explanation:
 
 def minesweeper(board, click):
     m, n = len(board), len(board[0])
-    directions = [ [ 0, 1], [0, -1], [1, 0], [-1, 0], [-1, -1], [-1, 1], [1, -1], [1, 1]]
+    directions = [ [0, 1], [0, -1], [1, 0], [-1, 0], [-1, -1], [-1, 1], [1, -1], [1, 1]]
 
     def is_valid(r, c):
         if 0 <= r < m and 0 <= c < n:
