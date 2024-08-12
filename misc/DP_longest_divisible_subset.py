@@ -16,7 +16,7 @@ nums: [1,2,4,8]
 Result: [1,2,4,8]
 '''
 
-def get_longest_divisable_subset(nums):
+def get_longest_divisible_subset(nums):
     if not nums:
         return []
     
@@ -29,7 +29,7 @@ def get_longest_divisable_subset(nums):
 
     nums.sort()
 
-    # [ length of longest divisable subset, index of previous item (-1 means None)]
+    # [ length of longest divisible subset, index of previous item (-1 means None)]
     DP = [ [1, -1] for i in range(n) ]
 
     for i in range(1, n):
@@ -51,5 +51,5 @@ def get_longest_divisable_subset(nums):
     return list(reversed(res))
 
 nums = [1, 2, 3, 4, 8]
-print(get_longest_divisable_subset(nums))
-assert get_longest_divisable_subset(nums) == [1,2,4,8]
+#print(get_longest_divisible_subset(nums))
+assert get_longest_divisible_subset(nums) == [1,2,4,8]

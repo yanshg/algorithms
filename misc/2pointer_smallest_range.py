@@ -44,23 +44,22 @@ def get_smallest_range(lists):
 
     left = 0
     for right, (n, i) in enumerate(num_index_list):
-        c = str(i)
-        window[c] += 1
-        if window[c] == 1:
+        window[i] += 1
+        if window[i] == 1:
             count += 1
 
         # move left if all lists included
-        while left < right and count == l:
+        while left <= right and count == l:
             # update left num and right num
             left_num = num_index_list[left][0]
             right_num = num_index_list[right][0]
             if not res or (res[1] - res[0] > right_num - left_num):
                 res = [left_num, right_num]
 
-            lc = str(num_index_list[left][1])
-            if window[lc] == 1:
+            li = num_index_list[left][1]
+            if window[li] == 1:
                 count -= 1
-            window[lc] -= 1
+            window[li] -= 1
             left += 1
 
     return res

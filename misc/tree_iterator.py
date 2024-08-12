@@ -29,14 +29,8 @@ class TreeIterator:
         
         raise StopIteration
 
-root = Node(1)
-root.left = Node(2)
-root.right = Node(3)
-root.left.left = Node(4)
-root.left.right = Node(5)
-root.right.left = Node(6)
-root.right.right = Node(7)
-
+root = Node(1, Node(2, Node(4), Node(5)), Node(3, Node(6), Node(7)))
 print(root)
+
 for i in TreeIterator(root):
     print(i)
