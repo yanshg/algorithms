@@ -40,7 +40,6 @@ def traverse_level_bfs(root):
 
             if node.left:
                 dq.append(node.left)
-
             if node.right:
                 dq.append(node.right)
 
@@ -54,14 +53,13 @@ def traverse_level_dfs(root):
         if not root:
             return
         
-        if len(res) < level + 1:
+        if len(res) == level:
             res.append([])
 
         res[level].append(root.val)
 
-        level += 1
-        dfs(root.left, level, res)
-        dfs(root.right, level, res)
+        dfs(root.left, level + 1, res)
+        dfs(root.right, level + 1, res)
 
     dfs(root, 0, res)
     return res

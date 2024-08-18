@@ -38,6 +38,7 @@ def get_palindrome_partitions(s):
                 backtrack(s, isPalindrome, i+1, path, res)
                 path.pop()
 
+    # use memo to improve performance to O(n^2)
     def dfs_with_memo(s, isPalindrome, start, memo = {}):
         if start == l:
             return [[]]

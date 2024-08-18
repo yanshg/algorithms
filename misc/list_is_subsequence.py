@@ -10,6 +10,7 @@ A subsequence of a string is a new string that is formed from the original strin
 
  Input: s = "abc", t = "ahbgdc"
  Output: true
+ 
  Example 2:
 
  Input: s = "axc", t = "ahbgdc"

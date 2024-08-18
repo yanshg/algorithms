@@ -30,7 +30,7 @@ def get_longest_pair_chain(pairs):
     res = 1
 
     pairs.sort()
-
+    
     # DP[i]: longest pair chain end with i-th item.
     DP = [ 1 ] * n
     for i in range(1, n):

@@ -38,7 +38,6 @@ def get_merged_list(root1, root2):
     v1 = get_next_value(g1)
     v2 = get_next_value(g2)
     while v1 != None or v2 != None:
-        print("v1:", v1, "v2:", v2)
         if v1 != None and v2 != None:
             if v1 <= v2:
                 res += [ v1 ]

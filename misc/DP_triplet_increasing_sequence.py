@@ -56,6 +56,6 @@ assert not triplet_lis(nums)
 nums = [5, 4, 3, 2, 1]
 assert not triplet_sequence(nums)
 
-nums = [5, 4, 3, 2, 1, 2, 3]
+nums = [5, 4, 3, 2, 1, 2]
 assert not triplet_sequence(nums)
     

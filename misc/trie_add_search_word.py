@@ -1,10 +1,10 @@
 '''
 Design a data structure that supports the following two operations:
 
-Copy
 void addWord(word)
 bool search(word)
-search(word) can search a literal word or a regular expression string containing only lettersa-zor.. A.means it can represent any one letter.
+search(word) can search a literal word or a regular expression string containing only letter or .. 
+A . means it can represent any one letter.
 
 For example:
 

@@ -30,7 +30,6 @@ def get_maximum_subarray_product(nums):
             min_ending_here = min(num, temp * num)
         print("after max_ending_here: ", max_ending_here)
         print("after min_ending_here: ", min_ending_here)
-        print("\n")
         
         max_so_far = max(max_so_far, max_ending_here)
 

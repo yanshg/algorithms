@@ -11,26 +11,37 @@ class Node:
 
     def __repr__(self):
         return f"({self.val}: ({self.left}) ({self.right}))"
+
+def get_left_depth(root):
+    if not root:
+        return 0
     
+    depth = 0
+    while root:
+        depth += 1
+        root = root.left
+
+    return depth
+
+def get_right_depth(root):
+    if not root:
+        return 0
+    
+    depth = 0
+    while root:
+        depth += 1
+        root = root.right
+        
+    return depth
+
 def count_complete_tree(root):
     # base case
     if not root:
         return 0
     
-    left_depth = 0
-    p = root
-    while p:
-        p = p.left
-        left_depth += 1
-
-    right_depth = 0
-    p = root
-    while p:
-        p = p.right
-        right_depth += 1
-
-    print(left_depth, right_depth)
-    print(1<<left_depth)
+    left_depth = get_left_depth(root)
+    right_depth = get_right_depth(root)
+    
     if left_depth == right_depth:
         return (1<<left_depth) - 1
     

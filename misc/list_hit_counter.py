@@ -14,13 +14,13 @@ import random,bisect
 
 REQUESTSPERFILE=100
 
-# In a memory efficient implmentation, this would be persisted to disk
+# In a memory efficient implementation, this would be persisted to disk
 # once full and only the path and metadata would remain in memory
 class PersistedFile:
     def __init__(self):
-        self.start_timestamp=None
-        self.end_timestamp=None
-        self.request_timestamps=list()
+        self.start_timestamp = None
+        self.end_timestamp = None
+        self.request_timestamps = list()
 
     def __repr__(self):
         return "start={}, end={}, size={}".format(self.start_timestamp,self.end_timestamp,len(self.request_timestamps))
@@ -30,9 +30,9 @@ class PersistedFile:
 
     def record(self,timestamp):
         if not self.start_timestamp:
-            self.start_timestamp=timestamp
+            self.start_timestamp = timestamp
 
-        self.end_timestamp=timestamp
+        self.end_timestamp = timestamp
         self.request_timestamps.append(timestamp)
 
     def save_to_file(self):
@@ -41,8 +41,8 @@ class PersistedFile:
 
 class HitCounter:
     def __init__(self):
-        self.current_file=PersistedFile()
-        self.prev_files=list()
+        self.current_file = PersistedFile()
+        self.prev_files = list()
 
     def record(self,timestamp):
         self.current_file.record(timestamp)
@@ -59,19 +59,19 @@ class HitCounter:
 
     def range(self,lower,upper):
         all_files=self.prev_files + [self.current_file]
-        start_times=[file.start_timestamp for file in all_files ]
-        end_times=[file.end_timestamp for file in all_files ]
+        start_times = [file.start_timestamp for file in all_files ]
+        end_times = [file.end_timestamp for file in all_files ]
 
-        start_file_index=bisect.bisect_left(start_times,lower)-1
-        end_file_index=bisect.bisect_left(end_times,upper)
+        start_file_index = bisect.bisect_left(start_times,lower)-1
+        end_file_index = bisect.bisect_left(end_times,upper)
 
-        start_file=all_files[start_file_index]
-        end_file=all_files[end_file_index]
+        start_file = all_files[start_file_index]
+        end_file =all_files[end_file_index]
 
-        start_file_pos=bisect.bisect_left(start_file.request_timestamps, lower)
-        end_file_pos=bisect.bisect_left(end_file.request_timestamps, upper)
+        start_file_pos =bisect.bisect_left(start_file.request_timestamps, lower)
+        end_file_pos = bisect.bisect_left(end_file.request_timestamps, upper)
 
-        num_req=0
+        num_req = 0
         num_req += len(start_file.request_timestamps[start_file_pos:])
         num_req += len(end_file.request_timestamps[:end_file_pos])
         num_req += (end_file_index - start_file_index) * REQUESTSPERFILE

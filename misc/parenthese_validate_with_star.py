@@ -1,13 +1,13 @@
 '''
 Given a string containing only three types of characters: '(', ')' and '*', write a function to check whether this string is valid. We define the validity of a string by these rules:
 
-Any left parenthesis'('must have a corresponding right parenthesis')'.
+Any left parenthesis '(' must have a corresponding right parenthesis ')'.
 
-Any right parenthesis')'must have a corresponding left parenthesis'('.
+Any right parenthesis ')' must have a corresponding left parenthesis '('.
 
-Left parenthesis'('must go before the corresponding right parenthesis')'.
+Left parenthesis '(' must go before the corresponding right parenthesis ')'.
 
-'*'could be treated as a single right parenthesis')'or a single left parenthesis'('or an empty string.
+'*' could be treated as a single right parenthesis ')' or a single left parenthesis '(' or an empty string.
 
 An empty string is also valid.
 
@@ -18,37 +18,37 @@ An empty string is also valid.
 
 # ((*)(()*)
 
-def is_valid_parenthese(s):
-    need = 0
-    for c in s:
+# Recursion
+
+def is_valid_wild_parenthesis(s):
+
+    def check(s, index, need_right):
+        if index == len(s):
+            return need_right == 0
+        
+        if need_right < 0:
+            return False
+        
+        c = s[index]
         if c == '(':
-            need += 1
+            return check(s, index + 1, need_right + 1)
         elif c == ')':
-            need -= 1
-            if need < 0:
-                return False
-    return need == 0
+            return check(s, index + 1, need_right - 1)
+        elif c == '*':
+            return check(s, index + 1, need_right) or \
+                    check(s, index + 1, need_right + 1) or \
+                    check(s, index + 1, need_right - 1)
 
-def backtrack(s, i, res):
-    if i == len(s):
-        if is_valid_parenthese(s):
-            res.add(''.join(s))
-        return
-        
-    if s[i] == '*':
-        for c in "( )":
-            s[i] = c
-            backtrack(s, i+1, res)
-            s[i] = ''
-    else:
-        backtrack(s, i+1, res)
-        
-    return
+    return check(s, 0, 0)
 
-def check_wild_parenthese(s):
-    res = set()
-    backtrack(list(s), 0, res)
-    return res
+s = "()"
+assert is_valid_wild_parenthesis(s)
+
+s = "(*)"
+assert is_valid_wild_parenthesis(s)
+
+s = "(*))"
+assert is_valid_wild_parenthesis(s)
 
 
 # O(n) solution
@@ -75,6 +75,8 @@ high表示把"*"看做左括号时，左括号的个数(即左括号的upper bou
 '''
 
 def check_valid_parenthesis_string(s):
+    # low:  number of '(' when assuming * are ')'
+    # high: number of '(' when assuming * are '('
     low, high = 0, 0
 
     for c in s:
@@ -86,12 +88,18 @@ def check_valid_parenthesis_string(s):
                 low -= 1
             high -= 1
         else:
+            # assume * are ')'
             if low > 0:
                 low -= 1
+
+            # assume * are '('
             high += 1
 
+        # not enough '('
         if high < 0:
             return False
+        
+    # At this stage, enough '(', so need check if too many '('
     return low == 0
     
 print(check_valid_parenthesis_string("**(((("))

@@ -51,7 +51,7 @@ def get_lis_count(nums):
             max_len = length[i]
             max_count = count[i]
     
-    # maybe multiple sequences have the max length
+    # multiple sequences may have the max length
     print("legth: ", length)
     print("count: ", count)
 

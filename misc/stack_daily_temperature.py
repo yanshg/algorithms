@@ -7,6 +7,9 @@ Note: The length of temperatures will be in the range[1, 30000]. Each temperatur
 
 '''
 
+# Monotone Stack
+
+# pop out items that less than current
 
 def get_warmer_temperature(temperatures):
     if not temperatures:
@@ -17,7 +20,7 @@ def get_warmer_temperature(temperatures):
     
     stack = []
     for i, curr_temp in enumerate(temperatures):
-        while stack and curr_temp > temperatures[stack[-1]]:
+        while stack and temperatures[stack[-1]] < curr_temp:
             # pop out the ones whose temperature < curr_temp
             index = stack.pop()
             res[index] = i - index
@@ -26,7 +29,7 @@ def get_warmer_temperature(temperatures):
 
     # for remaining index in stack, that: res[index] = 0
     # we need not any actions here, since the array was initialized with 0
-    
+
     return res
 
 temperatures = [73, 74, 75, 71, 69, 72, 76, 73]

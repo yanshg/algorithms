@@ -20,7 +20,7 @@ def match(s, p):
         if cp.isdigit():
             num = int(cp)
             while j+1 < lp and p[j+1].isdigit():
-                num += num * 10 + int(p[j+1])  
+                num = num * 10 + int(p[j+1])  
                 j += 1              
             i += num - 1
         elif cs != cp:

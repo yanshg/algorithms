@@ -29,15 +29,15 @@ def build_graph(start,words):
     return graph
 
 # BFS:
-def word_ladder_bfs(start,end,words):
+def word_ladder_bfs(start, end, words):
     if end not in words:
         return None
 
-    graph = build_graph(start,words)
+    graph = build_graph(start, words)
     print("graph:",graph)
 
     visited = set()
-    dq = deque([(start,[start])])
+    dq = deque([(start, [start])])
 
     while dq:
         (word,path) = dq.popleft()
@@ -76,15 +76,15 @@ def word_ladder_bibfs(start,end,words):
     q2 = { end:   [end] }
 
     while q1 and q2:
-        if len(q1)>len(q2):
+        if len(q1) > len(q2):
             q1,q2 = q2, q1
 
         q3 = dict()
 
-        for word,path in q1.items():
+        for word, path in q1.items():
             if word in q2:
                 # find cross word
-                full_path=path[:-1]+list(reversed(q2[word])) if path[0]==start else q2[word]+list(reversed(path[:-1]))
+                full_path = path[:-1] + list(reversed(q2[word])) if path[0]==start else q2[word] + list(reversed(path[:-1]))
                 return full_path
 
             visited.add(word)
@@ -92,9 +92,9 @@ def word_ladder_bibfs(start,end,words):
             for adj_word in graph[word]:
                 if adj_word not in visited and  \
                    adj_word not in q3:
-                    q3[adj_word]=path+[adj_word]
+                    q3[adj_word] = path + [ adj_word ]
 
-        q1=q3
+        q1 = q3
 
     return None
 

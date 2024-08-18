@@ -55,13 +55,13 @@ def get_second_minimum(root):
         if not root:
             return
         
+        # adjust min1 and min2 according to current val.
         nonlocal min1, min2
-        if root.val <= min1:
-            min1 = root.val
-        elif root.val <= min2:
+        if root.val < min1:
+            min2 = min1
+            min1 = root.val            
+        elif root.val < min2:
             min2 = root.val
-
-        print("min1: ", min1, "min2: ", min2)
 
         dfs(root.left)
         dfs(root.right)

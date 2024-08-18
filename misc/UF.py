@@ -7,6 +7,13 @@ class UF:
         self.size = [1] * n
         self.count = n
 
+    def find(self, p):
+        while self.parent[p] != p:
+            self.parent[p] = self.parent[self.parent[p]]
+            p = self.parent[p]
+        return p
+
+    # union p under q
     def union(self, p, q):
         rootp = self.find(p)
         rootq = self.find(q)
@@ -22,12 +29,6 @@ class UF:
         self.parent[rootp] = rootq
         self.size[rootq] += self.size[rootp]
         self.count -= 1
-
-    def find(self, p):
-        while self.parent[p] != p:
-            self.parent[p] = self.parent[self.parent[p]]
-            p = self.parent[p]
-        return p
 
     def connected(self, p, q):
         rootp = self.find(p)

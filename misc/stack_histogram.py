@@ -11,6 +11,10 @@ Given heights = [2,1,5,6,2,3],
 return 10.
 '''
 
+# Monotone Stack
+
+# pop out items which height large than current
+
 def max_area_in_histogram(heights):
     stack = []
 
@@ -20,9 +24,11 @@ def max_area_in_histogram(heights):
     heights += [ -1 ]
 
     for i, height in enumerate(heights):
-        while stack and height < heights[stack[-1]]:
+        while stack and heights[stack[-1]] > height:
             index = stack.pop()
-            width = i - stack[-1] - 1 if stack else i
+
+            # calculate width
+            width = i - stack[-1] - 1 if stack else i            
             max_area = max(max_area, heights[index] * width)
         stack.append(i)
 

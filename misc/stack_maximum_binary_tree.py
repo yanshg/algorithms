@@ -46,7 +46,7 @@ def get_maximum_binary_tree(nums):
     stack = []
     for num in nums:
         curr_node = Node(num)
-        while stack and num > stack[-1].val:
+        while stack and stack[-1].val < num:
             node = stack.pop()
             curr_node.left = node
         if stack:

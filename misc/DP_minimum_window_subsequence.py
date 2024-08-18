@@ -41,9 +41,7 @@ def get_min_window(s, t):
             elif j == len(t):
                 min_len = i - min_left + 1
                 break
-            
-
-    
+                
     if min_len == float('inf'):
         return ''
     

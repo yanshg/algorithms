@@ -13,6 +13,8 @@ from collections import deque
 
 def hops_to_end(hops):
     n = len(hops)
+
+    # add initial in visited
     visited = {0}
     dq = deque([0])
 

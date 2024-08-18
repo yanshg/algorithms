@@ -28,11 +28,12 @@ s = "a b   c  d  f\tg h"
 s = s.replace(' ', '').replace('\t', '')
 print(s)
 
-import re
 
+import re
 def soundex(name):
     name=re.sub(r'ck','c',name)
     name=re.sub(r'cs','c',name)
+    
     first=name[0]
     name=name[1:]
     name=re.sub(r'[aoeuiywh]','',name)

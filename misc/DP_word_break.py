@@ -33,11 +33,11 @@ def word_break_with_memo(s, words):
         for next_start in range(start+1, n+1):
             if s[start:next_start] in words and dfs(s, words, next_start, memo):
                 memo[start] = True
-                print(memo)
+                #print(memo)
                 return True
     
         memo[start] = False
-        print("memo: ", memo)
+        #print("memo: ", memo)
         return False
     
     memo = {}

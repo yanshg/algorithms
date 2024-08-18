@@ -33,6 +33,7 @@ def longest_substring_with_k_replaces(s: str, k: int)->int:
     max_len = 0
     for right, c in enumerate(s):
         window[c] += 1
+
         max_count = max(window.values())
         if right - left + 1 - max_count > k:
             # move left
@@ -41,6 +42,7 @@ def longest_substring_with_k_replaces(s: str, k: int)->int:
             if window[lc] == 0:
                 del window[lc]
             left += 1
+            
         max_len = max( max_len, right - left + 1 )
         print(max_len, "string:", s[left:right+1])
     return max_len

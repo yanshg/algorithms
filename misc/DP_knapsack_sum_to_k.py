@@ -34,8 +34,9 @@ def sum_to_target_ways(nums, target):
     # DP[i][j] = DP[i-1][j]         +     DP[i-1][j - num[i]]
     #            exclude nums[i],         include nums[i]
 
-    # DP[0][j] = 0
-    # DP[i][0] = 0
+    # DP[0][j] = 0 for j > 0
+    # DP[i][0] = 0 for i > 0
+    # DP[0][0] = 1
 
     # Unbounded Knapsack issue
 
@@ -50,7 +51,6 @@ def sum_to_target_ways(nums, target):
                 DP[j] += DP[j - num]
         print(DP)
     
-    print(DP)
     return DP[-1]
 
 

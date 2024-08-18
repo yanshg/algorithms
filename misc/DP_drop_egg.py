@@ -18,7 +18,9 @@ def get_times_for_egg_drop1(K, N):
     
     for k in range(2, K+1):
         for n in range(2, N+1):
+            # worst case, need test n times for n floors
             DP[k][n] = n
+            
             for i in range(1, n+1):
                 DP[k][n] = min(DP[k][n], 1 + max(DP[k-1][i-1], DP[k][n-i]))
 

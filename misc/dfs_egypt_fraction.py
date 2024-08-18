@@ -18,7 +18,7 @@ def egypt_fraction(a: int, b: int) -> list:
     f += 1
     return [ f ] + egypt_fraction(a * f - b, b * f)
 
-print(egypt_fraction(-4, 13))
+#print(egypt_fraction(-4, 13))
 assert egypt_fraction(4, 13) == [ 4, 18, 468]
 
 

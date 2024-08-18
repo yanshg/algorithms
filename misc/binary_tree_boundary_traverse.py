@@ -19,10 +19,8 @@ Input:
   3   4
 
 
-Ouput:
-
+Output:
 [1, 3, 4, 2]
-
 
 Explanation:
 
@@ -30,9 +28,9 @@ The root doesn't have left subtree, so the root itself is left boundary.
 The leaves are node 3 and 4.
 The right boundary are node 1,2,4. Note the anti-clockwise direction means you should output reversed right boundary.
 So order them in anti-clockwise without duplicates and we have [1,3,4,2].
+
 Example 2
 
-Copy
 Input:
 
     ____1_____
@@ -44,10 +42,8 @@ Input:
   7   8    9  10  
 
 
-Ouput:
-
+Output:
 [1,2,4,7,8,9,10,6,3]
-
 
 Explanation:
 

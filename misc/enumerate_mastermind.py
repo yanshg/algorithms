@@ -30,7 +30,7 @@ def is_code_guesses_match(code, guesses):
 
     return True
 
-def is_valid_guess(guesses):
+def is_valid_guesses(guesses):
     for code in range(100000, 1000000):
         if is_code_guesses_match(code, guesses):
             print(code)
@@ -39,7 +39,7 @@ def is_valid_guess(guesses):
     return False
 
 guesses = {175286: 2, 293416: 3, 654321: 0}
-print(is_valid_guess(guesses))
+print(is_valid_guesses(guesses))
 
 guesses = {123456: 4, 345678: 4, 567890: 4}
-print(is_valid_guess(guesses))
+print(is_valid_guesses(guesses))

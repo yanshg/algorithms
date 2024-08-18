@@ -34,12 +34,6 @@ Explanation: There is no path between 0 and 2.
 from collections import defaultdict, deque
 import heapq
 
-class Graph:
-    def __init__(self, edges):
-        self.adj = defaultdict(list)
-        for u, v, p in edges:
-            self.adj[u] += [[v, p]]
-
 def build_graph(edges):
     graph = defaultdict(list)
     for u, v, p in edges:

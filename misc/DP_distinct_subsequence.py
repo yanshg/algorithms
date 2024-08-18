@@ -6,8 +6,14 @@ A subsequence of a string is a new string which is formed from the original stri
 Here is an example:
 S="rabbbit", T="rabbit"
 
-Retur 3
+Return 3
 '''
+
+# A good example:   
+#
+#   "subsequence"     ->   "subsequenc"  +  "subsequnc"
+#   "sue"                  "su"             "sue"
+
 
 def get_distinct_subsequence_count(s: str, t: str) -> int:
     
@@ -31,7 +37,7 @@ def get_distinct_subsequence_count(s: str, t: str) -> int:
             DP[i][j] = DP[i-1][j]
             if s[i-1] == t[j-1]:
                 DP[i][j] += DP[i-1][j-1]
-                
+
     print(DP)
     return DP[-1][-1]
 

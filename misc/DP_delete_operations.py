@@ -13,6 +13,9 @@ Note:
 The length of given words won't exceed 500.
 '''
 
+# Solutions:
+#    1. first get LCS, result = len(s) + len(t) - 2 * len(LCS)
+#    2. directly using DP.
 
 def get_delete_operations(s: str, t: str) -> int:
     # base cases:

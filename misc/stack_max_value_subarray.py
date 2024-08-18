@@ -11,6 +11,7 @@ Do this in O(n) time and O(k) space. You can modify the input array in-place and
 '''
 
 from collections import deque
+
 def get_max_in_subarray_window(nums, k):
     res = []
 

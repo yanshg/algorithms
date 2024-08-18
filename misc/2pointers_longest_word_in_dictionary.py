@@ -48,6 +48,9 @@ def get_longest_word(s, d):
     for w in d:
         if is_subsequence(w, s):
             lw, lr = len(w), len(res)
+
+            # use comparison operators like '<', '>', '==', '<=', and '>='. 
+            # which comparing two strings based on their alphabetical order
             if lw > lr or (lw == lr and w < res):
                 res = w
     

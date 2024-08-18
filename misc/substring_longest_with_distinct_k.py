@@ -66,4 +66,3 @@ def longest_substring_1(s:str, distinct_count:int) -> int:
 
 s='eceba'
 print(longest_substring(s, 2))
-            

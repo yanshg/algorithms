@@ -36,6 +36,7 @@ def longest_substring(s: str, k: int) -> int:
                 if window[lc] == 0:
                     del window[lc]
                 left +=1
+                
                 if valid == len(window):
                     maxlen = max(maxlen, right - left)
                     print(s[left:right])

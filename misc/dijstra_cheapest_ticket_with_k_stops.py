@@ -29,8 +29,7 @@ The cheapest price from city 0 to city 2 with at most 0 stop costs 500, as marke
 
 # Dijstra
 
-# hashmap to record cost and stops from the source to each city
-# heapq to get cheapest price
+# hashmap to record cheapest cost for each city from source
 
 from collections import defaultdict
 import heapq
@@ -45,15 +44,14 @@ def get_cheapest_with_k_stops(n, edges, src, dest, k):
     costs = [ float('inf') ] * n
     costs[src] = 0
 
-    # heapq
     # cost, curr, stops
-    hq = [[0, src, 0]]
-    
+    hq = [[0, src, 0]]    
     while hq:
         [ cost, curr, stops ] = heapq.heappop(hq)
         if stops > k or cost > costs[curr]:
             continue
 
+        # Need re-calculate cost for all next cities of curr.
         for next_dest, price in graph[curr]:
             next_cost = cost + price
             if next_cost < costs[next_dest]:

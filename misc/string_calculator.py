@@ -46,6 +46,7 @@ def calculator(s):
 # cases:  1 + 2 * 3
 #         1 * 2 + 3
 
+# Notes:  the sequence is reversed after pop()
 def calculate(operator, num1, num2):
     # num1 is second 
     # num2 is first

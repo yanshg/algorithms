@@ -9,7 +9,7 @@ def decode(s):
 
     for c in s:
         if c.isdigit():
-            num += num * 10 + int(c)
+            num = num * 10 + int(c)
         else:
             if num > 0:
                 # normal case

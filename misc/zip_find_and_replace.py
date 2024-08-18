@@ -24,6 +24,7 @@ Example 1:
 
 Input: s = "abcd", indices = [0, 2], sources = ["a", "cd"], targets = ["eee", "ffff"]
 Output: "eeebffff"
+
 Explanation:
 "a" occurs at index 0 in s, so we replace it with "eee".
 "cd" occurs at index 2 in s, so we replace it with "ffff".

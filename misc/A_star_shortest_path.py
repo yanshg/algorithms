@@ -40,6 +40,9 @@ We need to eliminate at least two obstacles to find such a walk.
 from heapq import heappush, heappop
 from collections import defaultdict
 
+# heap sort "steps + manhattan_distance" for every (y, x)
+# when manhattan distance < k - used_eliminations, then get the result.
+
 class Solution:
     def shortestPath(self, grid, k):
         m, n = len(grid), len(grid[0])
@@ -54,6 +57,9 @@ class Solution:
         ]
 
         fringe_heap = [(manhattan_distance(0, 0), 0, 0, 0, 0)]
+
+        # min_eliminations is dict structure with { (y, x): k + 1 }
+        # initially with { (0,0): 0 }
         min_eliminations = defaultdict(lambda: k + 1, {(0, 0): 0})
 
         while fringe_heap:

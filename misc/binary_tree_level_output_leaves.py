@@ -39,8 +39,6 @@ class Node:
     def __repr__(self):
         return f"({self.val}: ({self.left}) ({self.right}))"
 
-#from collections import defaultdict
-
 def get_leaves(root):
     res = []
 
@@ -51,6 +49,8 @@ def get_leaves(root):
         left_depth = dfs(root.left, res)
         right_depth = dfs(root.right, res)
         depth = 1 + max(left_depth, right_depth)
+
+        # leaves' depth should be 1, and need add to res[0]
         if len(res) < depth:
             res.append([])
         res[depth-1].append(root.val)
