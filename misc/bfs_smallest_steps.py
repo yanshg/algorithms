@@ -14,7 +14,6 @@ For example, given 100, you can reach 1 in five steps with the following route: 
 
 from collections import deque
 
-
 def get_next_integers(n):
     res = [ n - 1 ]
 

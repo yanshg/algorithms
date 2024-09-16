@@ -5,7 +5,7 @@ Now, say our starting node is_eventually safe _if and only if we must eventually
 
 Which nodes are eventually safe? Return them as an array in sorted order.
 
-The directed graph has N nodes with labels0, 1, ..., N-1, whereNis the length ofgraph. The graph is given in the following form:graph[i]is a list of labelsjsuch that(i, j)is a directed edge of the graph.
+The directed graph has N nodes with labels 0, 1, ..., N-1, where N is the length of graph. The graph is given in the following form: graph[i] is a list of labels j such that (i, j) is a directed edge of the graph.
 
 Copy
 Example:

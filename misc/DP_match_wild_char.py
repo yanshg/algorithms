@@ -3,9 +3,11 @@ DP: given an input and pattern solve a regex expression matching support for '.'
 
 '''
 
+# Notes:  the first argument should be regex string.
+
 # Recursion
 
-# O(3 ^ m)    m = max (len(s), len(r))
+# O(2 ^ (m + n))
 def match_recursion(r: str, s: str) -> bool:
     # base cases:
     if not r:
@@ -27,6 +29,7 @@ def match_recursion(r: str, s: str) -> bool:
 # DP 
 # r should be first argument
 
+# O(m * n)
 def match_dp(r: str, s: str) -> bool:
     #  r:    a.c*ef
     #  s:    abcdef

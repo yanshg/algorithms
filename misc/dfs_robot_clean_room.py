@@ -7,6 +7,17 @@ Grid Representation: The room is modeled as a grid where 0 represents a wall and
 Robot’s Capabilities: The robot can move forward, turn left, turn right, and clean the current cell.
 Objective: Use the robot to clean all accessible cells in the room.
 
+
+Example Walkthrough
+Starting Point:
+The robot starts at the initial position (0, 0) and begins cleaning.
+
+Exploring Directions:
+The robot tries to move in each of the four directions (up, right, down, left). If it can move to a new cell, it cleans that cell and continues exploring from there.
+
+Backtracking:
+If the robot encounters an obstacle or a visited cell, it turns right and tries the next direction. After exploring all possible directions from a cell, it backtracks to the previous cell using the go_back function.
+
 '''
 
 # This is the robot's control interface.

@@ -8,9 +8,6 @@ re_ns = re.sub("\s", '', s)
 print(re_ns)
 
 # transcript_regex.py
-
-import re
-
 REGEX_REPLACEMENTS = [
     (r"blast\w*", "😤"),
     (r" [-T:+\d]{25}", ""),
