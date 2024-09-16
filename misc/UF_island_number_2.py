@@ -44,6 +44,7 @@ class UF:
         self.capacity = n
         self.count = 0
 
+    # 
     def add(self, p):
         assert p >= 0 and p < self.capacity
 
@@ -87,13 +88,34 @@ class UF:
 class Matrix:
     def __init__(self, m, n):
         self.matrix = [ [ 0 for j in range(n) ]  for i in range(m) ]
-        self.uf = UF(m * n + 1)
+        self.uf = UF(m * n)
         self.rows = m
         self.cols = n
 
+    def is_valid(self, i, j):
+        return 0 <= i < self.rows and 0 <= j < self.cols
+    
     def add(self, i, j):
-        index = i * self.rows + j
-        self.uf.add()
+        if self.is_valid(i, j):
+            self.matrix[i][j] = 1
+            index = i * self.cols + j
+            self.uf.add(index)
+
+            for di,dj in [ (0, 1), (0, -1), (1, 0), (-1, 0) ]:
+                ni, nj = i + di, j + dj
+                if self.is_valid(ni, nj) and \
+                    self.matrix[ni][nj] == 1:
+                    nindex = ni * self.cols + nj
+                    self.uf.union(index,  nindex)
+
+        return self.uf.get_count()
+
+
 m, n = 3, 3
+positions = [[0,0], [0,1], [1,2], [2,1]]
+
+matrix = Matrix(m, n)
+result = [ matrix.add(pi, pj) for pi, pj in positions ]
+print(result)
 
             

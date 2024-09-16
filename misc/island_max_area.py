@@ -25,15 +25,14 @@ class Solution1:
         matrix = self.matrix
         rows = len(matrix)
         cols = len(matrix[0])
-        if i<0 or i>=rows or j<0 or j>=cols or matrix[i][j] == '-1':
+        if i<0 or i>=rows or j<0 or j>=cols or matrix[i][j] != '0':
             return
 
-        if matrix[i][j] == '0':
-            matrix[i][j] = '-1'
-            self.sink_open_water_dfs(i-1, j)
-            self.sink_open_water_dfs(i+1, j)
-            self.sink_open_water_dfs(i, j-1)
-            self.sink_open_water_dfs(i, j+1)
+        matrix[i][j] = '-1'
+        self.sink_open_water_dfs(i-1, j)
+        self.sink_open_water_dfs(i+1, j)
+        self.sink_open_water_dfs(i, j-1)
+        self.sink_open_water_dfs(i, j+1)
 
     def get_island_area_dfs(self, i, j):
         matrix = self.matrix

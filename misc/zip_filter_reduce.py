@@ -193,3 +193,11 @@ def solve_cryptarithmetic(words):
 assert solve_cryptarithmetic(['SEND','MORE','MONEY']) == {'M': 1, 'R': 8, 'D': 7, 'N': 6, 'E': 5, 'S': 9, 'O': 0, 'Y': 2}
 assert solve_cryptarithmetic(['CP','IS','FUN','TRUE']) == {'T': 1, 'P': 2, 'R': 0, 'N': 7, 'E': 4, 'U': 8, 'S': 5, 'I': 6, 'C': 3, 'F': 9}
 
+
+
+
+all = []
+intervals = [ (1, 2),  (3, 4) ]
+for interval in intervals:
+    all += [ (interval[0], 1), (interval[1], -1) ]
+print(all)

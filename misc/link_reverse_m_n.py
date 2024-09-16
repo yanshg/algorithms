@@ -50,7 +50,7 @@ def reverse_list(head, m, n):
         node_m.next.next = curr
         node_m.next = prev
 
-    return head
+    return dummy.next
 
 def reverse_list1(head, m, n):
     if not head:
@@ -79,10 +79,10 @@ def reverse_list1(head, m, n):
     return dummy.next
 
 def generate_list(nums):
-    pre, head = None, None
+    prev, head = None, None
     for num in reversed(nums):
-        head = Node(num, pre)
-        pre = head
+        head = Node(num, prev)
+        prev = head
     return head
 
 nums = [1, 2, 3, 4, 5]

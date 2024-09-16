@@ -41,6 +41,7 @@ def get_random(head):
 
     while p:
         r = random.randint(0, i)
+        print(r)
         if r == 0:
            res = p.val
         
