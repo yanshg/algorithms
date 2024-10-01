@@ -21,7 +21,7 @@ def get_parents(root, p, q):
 
         if node.left:
             dq.append(node.left)
-            parents[node.left] = node
+            parents[node.right] = node
 
         if node.right:
             dq.append(node.right)

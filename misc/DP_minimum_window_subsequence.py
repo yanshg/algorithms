@@ -5,7 +5,6 @@ If there is no such window in S that covers all characters in T, return the empt
 
 Example 1:
 
-Copy
 Input:
 S = "abcdebdde", T = "bde"
 

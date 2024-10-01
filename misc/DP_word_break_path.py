@@ -66,6 +66,31 @@ def word_break_path_with_memo(s, words):
     print("memo: ", memo)
     return [ ' '.join(path) for path in res ]
 
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+        word_set = set(wordDict)
+        memo = {}
+        
+        def backtrack(start):
+            if start in memo:
+                return memo[start]
+            if start == len(s):
+                return [""]
+            
+            sentences = []
+            for end in range(start + 1, len(s) + 1):
+                word = s[start:end]
+                if word in word_set:
+                    for subsentence in backtrack(end):
+                        if subsentence:
+                            sentences.append(word + " " + subsentence)
+                        else:
+                            sentences.append(word)
+            
+            memo[start] = sentences
+            return sentences
+        
+        return backtrack(0)
 
 s = "catsanddogcatsanddogcatdog"
 words = ["cat", "cats", "and", "sand", "dog"]

@@ -9,25 +9,27 @@ class Node:
     
 class TreeIterator:
     def __init__(self, root):
-        self.curr = root
         self.stack = []
+        self._leftmost_inorder(root)
 
     def __iter__(self):
         return self
     
     def __next__(self):
-        curr = self.curr
-        while curr:
-            self.stack.append(curr)
-            curr = curr.left
-
-        if self.stack:
-            curr = self.stack.pop()
-            val = curr.val
-            self.curr = curr.right
-            return val
+        if not self.stack:
+            raise StopIteration
         
-        raise StopIteration
+        root = self.stack.pop()
+        self._leftmost_inorder(root.right)
+        return root.val
+
+    def _leftmost_inorder(self, root):        
+        while root:
+            self.stack.append(root)
+            root = root.left
+
+    def has_next(self):
+        return len(self.stack) > 0
 
 root = Node(1, Node(2, Node(4), Node(5)), Node(3, Node(6), Node(7)))
 print(root)

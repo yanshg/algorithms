@@ -9,7 +9,7 @@ class Singleton:
     instances = dict()
     even_instance = False
 
-    def __init__(self,instance_num):
+    def __init__(self, instance_num):
         self.instance_num = instance_num
 
     @staticmethod

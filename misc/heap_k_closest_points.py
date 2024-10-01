@@ -10,15 +10,12 @@ import heapq
 
 def get_k_closest_points_to_origin(points, k):
     hq = []
-
-    i = 0
     for x, y in points:
         dist = - (x * x + y * y)
-        if i < k:
+        if len(hq) < k:
             heapq.heappush(hq, (dist, x, y))
-        elif dist > hq[0][0]:
+        else:
             heapq.heappushpop(hq, (dist, x, y))
-        i += 1
 
     return [ (x, y) for dist, x, y in hq ]
     

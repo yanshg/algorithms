@@ -1,5 +1,11 @@
 #!/usr/bin/python
 
+
+# The heap may include:
+#  (0, startnode), (dis1, node1), (dis2, node1), (dis3, node2), (dis4, node2)
+#
+#  Get the smallest distance
+#  
 import heapq
 
 def dijstra_distances(graph, start):

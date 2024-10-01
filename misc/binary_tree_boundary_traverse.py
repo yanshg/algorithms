@@ -67,8 +67,7 @@ def get_boundary(root):
     if not root:
         return None
     
-    res = []
-    res.append(root.val)
+    res = [ root.val ]
     get_side_boundary(root.left, res, isLeft = True)
     get_leafs(root, res)
     get_side_boundary(root.right, res, isLeft = False)

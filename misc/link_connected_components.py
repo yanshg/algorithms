@@ -3,7 +3,7 @@ We are given head, the head node of a linked list containing unique integer valu
 
 We are also given the list G, a subset of the values in the linked list.
 
-Return the number of connected components inG, where two values are connected if they appear consecutively in the linked list.
+Return the number of connected components in G, where two values are connected if they appear consecutively in the linked list.
 
 Example 1:
 

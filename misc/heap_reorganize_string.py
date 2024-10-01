@@ -43,7 +43,7 @@ def reorganize_string(s):
         
         last = res[-1] if res else ""
         if c1 == last:
-            c1, c2 = c2, c1
+            c1, count1, c2, count2 = c2, count2, c1, count1
 
         res += c1 + c2
 
@@ -63,6 +63,36 @@ def reorganize_string(s):
         res += c1
 
     return res
+
+import heapq
+from collections import Counter
+
+def reorganizeString(s: str) -> str:
+    # Count the frequency of each character
+    counter = Counter(s)
+    max_heap = [(-count, char) for char, count in counter.items()]
+    heapq.heapify(max_heap)
+    
+    prev_count, prev_char = 0, ''
+    result = []
+    
+    while max_heap:
+        count, char = heapq.heappop(max_heap)
+        result.append(char)
+        
+        if prev_count < 0:
+            heapq.heappush(max_heap, (prev_count, prev_char))
+        
+        prev_count, prev_char = count + 1, char
+    
+    result_str = ''.join(result)
+    return result_str if len(result_str) == len(s) else ""
+
+# Example usage
+s = "aab"
+print(reorganizeString(s))  # Output: "aba"
+
+
 
 s = "aab"
 print(reorganize_string(s))

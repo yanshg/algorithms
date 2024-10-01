@@ -5,6 +5,22 @@ Note that after backspacing an empty text, the text will continue empty.
 
 """
 
+
+class Solution:
+    def backspaceCompare(self, s: str, t: str) -> bool:
+        def build(string):
+            stack = []
+            for char in string:
+                if char != '#':
+                    stack.append(char)
+                elif stack:
+                    stack.pop()
+            return ''.join(stack)
+        
+        return build(s) == build(t)
+
+
+
 def backspace_compare(s,t):
     def build(s):
         skip=0

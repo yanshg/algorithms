@@ -30,18 +30,17 @@ def remove_invalid_parentheses_stack(s):
 
 
 def get_extra_parentheses(S):
-    need_left, need_right = 0, 0
+    extra_left, extra_right = 0, 0
     for c in S:
         if c == '(':
-            need_right += 1
+            extra_left += 1
         elif c == ')':
-            need_right -= 1
-            if need_right == -1:
-                need_left += 1
-                need_right = 0
-    # extra left '(' = need_right
-    # extra right ')' = need_left
-    return need_right, need_left 
+            extra_left -= 1
+            if extra_left == -1:
+                extra_right += 1
+                extra_left = 0
+    
+    return extra_left, extra_right 
 
 def is_valid_parentheses(S):
     extra_left, extra_right = get_extra_parentheses(S)
@@ -80,6 +79,3 @@ print(get_valid_parentheses(s))
 
 s='(()a(a)))(000))))))'
 print(remove_invalid_parentheses_stack(s))
-
-
-
