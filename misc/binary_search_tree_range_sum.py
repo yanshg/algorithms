@@ -8,7 +8,6 @@ class Node:
         self.left = left
         self.right = right
 
-
 def get_bst_sum(root, L, R):
     if not root:
         return 0

@@ -1,9 +1,17 @@
-import threading,time
+import threading, time
 
-def thread_func(name):
-    print("Starting thread ", name)
-    time.sleep(2)
-    print("Finishing thread ", name)
+global_variable = 0
+lock = threading.Lock()
+
+def thread_func(i):
+    global global_variable
+
+    print(f"Starting thread {i}, global_variable: {global_variable}")
+    time.sleep(1)
+    with lock:
+        global_variable += i
+
+    print(f"Finishing thread {i}, global_variable: {global_variable}")
 
 if __name__ == '__main__':
     print("Main: creating the threads")

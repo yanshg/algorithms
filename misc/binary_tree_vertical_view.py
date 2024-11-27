@@ -16,6 +16,9 @@ class Node:
 from collections import defaultdict, deque
 
 def get_vertical_view(root):
+    if not root:
+        return []
+    
     columns = defaultdict(list)
     
     dq = deque([(root, 0)])

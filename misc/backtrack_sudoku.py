@@ -39,7 +39,30 @@ def solve_sudoku(board):
         return False
     
     return backtrack(board, 0, 0)
-    
+
+
+def solveSudoku1(board):
+    def is_valid(board, row, col, num):
+        for i in range(9):
+            if board[row][i] == num or board[i][col] == num or board[row//3*3 + i//3][col//3*3 + i%3] == num:
+                return False
+        return True
+
+    def solve(board):
+        for row in range(9):
+            for col in range(9):
+                if board[row][col] == '.':
+                    for num in '123456789':
+                        if is_valid(board, row, col, num):
+                            board[row][col] = num
+                            if solve(board):
+                                return True
+                            board[row][col] = '.'
+                    return False
+        return True
+
+    solve(board)
+
 board = [
     ['7', '8', '.', '4', '.', '.', '1', '2', '.' ],
     ['6', '.', '.', '.', '7', '5', '.', '.', '9' ],

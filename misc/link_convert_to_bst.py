@@ -42,19 +42,24 @@ def generate_list(nums):
         prev = head
     return head
 
+ # Helper function to find the middle of the linked list
+def find_middle(start, end):
+    slow = fast = start
+    while fast != end and fast.next != end:
+        slow = slow.next
+        fast = fast.next.next
+    return slow
+
 def convert_to_bst(head, start, end):
     if not head or start == end:
         return None
     
     # first get middle element
-    slow, fast = start, start
-    while fast.next and fast.next.next and fast.next != end and fast.next.next != end:
-        slow = slow.next
-        fast = fast.next.next
+    mid = find_middle(start, end)
 
-    root = TreeNode(slow.val)
-    root.left = convert_to_bst(head, start, slow)
-    root.right = convert_to_bst(head, slow.next, end)
+    root = TreeNode(mid.val)
+    root.left = convert_to_bst(head, start, mid)
+    root.right = convert_to_bst(head, mid.next, end)
     
     return root
 

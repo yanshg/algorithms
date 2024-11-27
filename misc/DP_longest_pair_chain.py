@@ -1,5 +1,5 @@
 '''
-You are givennpairs of numbers. In every pair, the first number is always smaller than the second number.
+You are given n pairs of numbers. In every pair, the first number is always smaller than the second number.
 
 Now, we define a pair(c, d)can follow another pair(a, b)if and only ifb < c. Chain of pairs can be formed in this fashion.
 

@@ -22,6 +22,7 @@ class Node:
         self.left = left
         self.right = right
 
+# pop with backward mode
 def postorderTraversal(root):
     if not root:
         return []
@@ -34,8 +35,7 @@ def postorderTraversal(root):
             stack.append(node.left)
         if node.right:
             stack.append(node.right)
-        
-    print(result)
+
     return result[::-1]
     
 root = Node(1, Node(2, Node(4), Node(5)), Node(3, Node(6), Node(7)))

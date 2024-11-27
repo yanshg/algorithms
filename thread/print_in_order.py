@@ -25,7 +25,7 @@ class Solution:
             self.third_lock.release()
 
     def print_third(self):
-        with self.second_lock:
+        with self.third_lock:
             print("starting third sub")
             time.sleep(1)
             print("third")
