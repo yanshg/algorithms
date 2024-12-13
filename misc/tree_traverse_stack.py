@@ -12,7 +12,7 @@ def inorder(root):
         if curr:
             stack.append(curr)
             curr = curr.left
-        elif stack:
+        else:
             curr = stack.pop()
             yield curr.val
             curr = curr.right
@@ -39,7 +39,7 @@ def preorder(root):
             yield curr.val
             stack.append(curr)
             curr = curr.left
-        elif stack:
+        else:
             curr = stack.pop()
             curr = curr.right
 
@@ -51,7 +51,7 @@ def postorder(root):
             stack.append(curr)
             stack.append(curr)
             curr = curr.left
-        elif stack:
+        else:
             curr = stack.pop()
             if stack and curr == stack[-1]:
                 curr = curr.right

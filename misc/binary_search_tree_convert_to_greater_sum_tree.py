@@ -52,14 +52,18 @@ def convert_bst_to_gst(root):
     return root
     
 
-# Example Usage
-# Construct a BST:       4
-#                       / \
-#                      1   6
-#                     / \ / \
-#                    0  2 5  7
-#                       \     \
-#                        3     8
+'''
+Construct a BST:
+                       4
+                      / \
+                     1   6
+                    / \ / \
+                   0  2 5  7
+                      \     \
+                       3     8
+'''
+
+
 root = TreeNode(4)
 root.left = TreeNode(1, TreeNode(0), TreeNode(2, None, TreeNode(3)))
 root.right = TreeNode(6, TreeNode(5), TreeNode(7, None, TreeNode(8)))

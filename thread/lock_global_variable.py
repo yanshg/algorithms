@@ -1,5 +1,10 @@
 '''
 Creating deadlock-free APIs that access the same variable involves careful management of concurrency. Here's an example using Python with threading and locks to ensure thread safety:
+
+We use a lock to ensure that only one thread can access the shared variable at a time.
+Each API function (api_1, api_2, api_3) acquires the lock before modifying the shared variable and releases it afterward.
+This prevents deadlocks and ensures that the shared variable is updated safely.
+
 '''
 
 import threading

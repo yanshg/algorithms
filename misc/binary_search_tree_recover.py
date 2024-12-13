@@ -26,6 +26,8 @@ def recover_bst(root):
         
         inorder(node.left)
 
+        # first should be higher one
+        # second should be lower one
         if not first and prev.val >= node.val:
             first = prev
         if first and prev.val >= node.val:

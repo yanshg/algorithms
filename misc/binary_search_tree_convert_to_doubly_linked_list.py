@@ -11,7 +11,7 @@ class Node:
         return f"({self.val}: {self.left}, {self.right})"
    
 
-def convert_bst_to_list(root):
+def convert_bst_to_doubly_linked_list(root):
 
     prev, head = None, None
 
@@ -39,4 +39,4 @@ def convert_bst_to_list(root):
     
 root = Node(1, Node(2, None, Node(5)), Node(3))
 print(root)
-convert_bst_to_list(root)
+convert_bst_to_doubly_linked_list(root)

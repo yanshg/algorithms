@@ -39,7 +39,7 @@ def get_shortest_palindrome_string(s: str) -> str:
                     DP[i][j] = s1
                 else:
                     DP[i][j] = s2
-    return DP[0][l-1]
+    return DP[0][-1]
 
 assert get_shortest_palindrome_string("race") == "ecarace"
 assert get_shortest_palindrome_string("google") == "elgoogle"

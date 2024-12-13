@@ -98,10 +98,11 @@ def get_maximum_width(root):
 
     while dq:
         start = dq[0][1]
+        end = dq[-1][1]
+        max_width = max(max_width, end - start + 1)
+
         for _ in range(len(dq)):
             node, end = dq.popleft()
-            max_width = max(max_width, end - start + 1)
-
             if node.left:
                 dq.append((node.left, 2 * end + 1))
             if node.right:
