@@ -18,20 +18,26 @@ If nums=[1,2,3], a solution is:
 ]
 '''
 
-def get_subsets(nums):
-    n = len(nums)
-    res = []
+def get_subsets_iteration(nums):
+    result = [ [] ]
+    for num in nums:
+        result += [ subset + [num] for subset in result ]
+    return result
 
-    def backtrack(nums, start, subset, res):
-        res += [ subset[:] ]
-        
-        for i in range(start, n):
+def get_subsets_backtrack(nums):
+    result = []
+
+    def backtrack(start, subset, result):
+        result += [ subset[:] ]
+
+        for i in range(start, len(nums)):
             subset.append(nums[i])
-            backtrack(nums, i+1, subset, res)
+            backtrack(i + 1, subset, result)
             subset.pop()
-
-    backtrack(nums, 0, [], res)
-    return res
+    
+    backtrack(0, [], result)
+    return result
 
 nums = [ 1, 2, 3 ]
-print(get_subsets(nums))
+print(get_subsets_iteration(nums))
+print(get_subsets_backtrack(nums))
