@@ -36,8 +36,7 @@ def calculator(s):
                 break
         return sum(stack)
 
-    slist = deque(list(s.replace(' ', '')))
-    return helper(slist)
+    return helper(deque(list(s.replace(' ', ''))))
 
 # consider +-*/ as operator
 # use 2 stacks, one for numbers, one for operators
@@ -105,8 +104,7 @@ def calculator1(s):
 
         return nums[-1] if nums else 0  
 
-    slist = list(s.replace(' ', ''))
-    return helper(slist)
+    return helper(list(s.replace(' ', '')))
 
 
 s = '-7 * (8+8)  /4'
