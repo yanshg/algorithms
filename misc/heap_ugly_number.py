@@ -11,15 +11,16 @@ import heapq
 
 def get_ugly_number(n):
     hq = [ 1 ]
-    i = 0
-    while hq:
-        k = heapq.heappop(hq)
-        if i == n:
-            return k
-        
+    res = 1
+    for i in range(n+1):
+        res = heapq.heappop(hq)
+        while hq and hq[0] == res:
+            heapq.heappop(hq)
+
         for factor in [ 2, 3, 5 ]:
-            heapq.heappush(hq, k * factor)
-        i += 1
+            heapq.heappush(hq, res * factor)
+
+    return res
 
 assert get_ugly_number(0) == 1
 assert get_ugly_number(1) == 2

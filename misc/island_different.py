@@ -19,7 +19,7 @@ def get_different_islands(matrix):
         dfs(matrix, i, j+1, directions, 'r')
         dfs(matrix, i-1, j, directions, 'u')
         dfs(matrix, i, j-1, directions, 'l')
-        directions += [ "-" + direction ]
+        #directions += [ "-" + direction ]
 
     for i in range(rows):
         for j in range(cols):

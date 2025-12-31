@@ -22,7 +22,8 @@ def get_anagram_numbers(s):
                 '7': 'seven',
                 '8': 'eight',
                 '9': 'nine',
-                }
+    }
+    counts_mapping = { c: Counter(mapping[c]) for c in mapping }
     
     def is_contained(counts, num_str_counts):
         for c in num_str_counts:
@@ -30,23 +31,18 @@ def get_anagram_numbers(s):
                 return False
         return True
 
-    def backtrack(counts, path = []):
+    def backtrack(counts, res):
         if not counts:
-            return ''.join(path)
-        
-        for num, num_str in mapping.items():
-            num_counts = Counter(num_str)
-            if is_contained(counts, num_counts):
-                path.append(num)
-                res = backtrack(counts - num_counts, path)
-                if res:
-                    return res
-                path.pop()
-        
+            return res
+
+        for c in mapping:
+            if is_contained(counts, counts_mapping[c]):
+                result = backtrack(counts - counts_mapping[c], res + c)
+                if result:
+                    return result
         return ''
-    
-    counts = Counter(s)
-    return backtrack(counts, [])
+
+    return backtrack(Counter(s), '')
     
 s = 'niesevehrtfeev'
 print(get_anagram_numbers(s))

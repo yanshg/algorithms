@@ -42,45 +42,38 @@ bank: ["AAAACCCC", "AAACCCCC", "AACCCCCC"]
 return: 3
 '''
 
-from collections import deque, defaultdict
+from collections import deque
 
 def is_next_mutation(gene1, gene2):
-    if not gene1 or not gene2 or len(gene1) != len(gene2):
+    if not gene1 or not gene2 or gene1 == gene2 or len(gene1) != len(gene2):
         return False
     
-    diff = sum([ int(c1 != c2) for c1, c2 in zip(gene1, gene2) ])
-    return diff == 1
+    return sum([ 1 for c1, c2 in zip(gene1, gene2) if c1 != c2 ]) == 1
     
-def build_graph(genes):
-    graph = defaultdict(list)
-
-    n = len(genes)
-    for i in range(n-1):
-        for j in range(i+1, n):
-            if is_next_mutation(genes[i], genes[j]):
-                graph[genes[i]] += [ genes[j] ]
-                graph[genes[j]] += [ genes[i] ]
-
-    return graph
-
+def get_next_mutations(gene, bank):
+    return [ g for g in bank if is_next_mutation(gene, g) ]
+    
 def get_mutations(bank, start, end):
-    graph = build_graph(bank + [ start ])
-    print(graph)
+    if not bank or not isinstance(bank, list) or end not in bank:
+        return 0
 
+    steps = 0
     visited = {start}
-    dq = deque([(start, [start])])
+    dq = deque([start])
 
     while dq:
-        gene, path = dq.popleft()
-        if gene == end:
-            print(path)
-            return len(path) - 1
+        for _ in range(len(dq)):
+            gene = dq.popleft()
+            if gene == end:
+                return steps
+
+            for next_gene in get_next_mutations(gene, bank):
+                if next_gene not in visited:
+                    visited.add(next_gene)
+                    dq.append(next_gene)
+
+        steps += 1
         
-        for next_gene in graph[gene]:
-            if next_gene not in visited:
-                dq.append((next_gene, path + [next_gene]))
-                visited.add(next_gene)
-    
     return 0
         
     

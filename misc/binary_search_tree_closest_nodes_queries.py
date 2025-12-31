@@ -57,3 +57,5 @@ print(root)
 
 queries = [ 2, 5, 16]
 print(get_closest_queries(root, queries))
+
+assert get_closest_queries(root, queries) == [[2, 2], [4, 6], [15, -1]]

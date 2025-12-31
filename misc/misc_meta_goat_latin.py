@@ -17,20 +17,21 @@ Example: "The quick brown fox" → "heTmaa uickqmaaa rownbmaaaa oxfmaaaaa"
 
 '''
 
-def get_goat_latin(s:str) -> str:
+def to_goat_latin(s:str) -> str:
     vowels = "aeiou"
     words = s.strip().split()
-    transformed_words = []
+    results = []
 
-    for index, word in enumerate(words):
+    for i, word in enumerate(words, start=1):
         if word[0] in vowels:
-            word += 'ma'
+            transformed_word = word + 'ma'
         else:
-            word = word[1:] + word[0] + 'ma'
-        word += 'a' * (index+1)
-        transformed_words += [ word ]
-    
-    return ' '.join(transformed_words)
+            transformed_word = word[1:] + word[0] + 'ma'
+
+        transformed_word += 'a' * i
+        results += [ transformed_word ]
+
+    return ' '.join(results)
 
 s = " The quick brown fox "
-print(get_goat_latin(s))
+print(to_goat_latin(s))

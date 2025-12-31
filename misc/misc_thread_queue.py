@@ -37,7 +37,8 @@ def worker():
         q.task_done()
 
 # Turn-on the worker thread.
-threading.Thread(target=worker, daemon=True).start()
+t = threading.Thread(target=worker, daemon=True)
+t.start()
 
 # Send thirty task requests to the worker.
 for item in range(30):

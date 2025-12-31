@@ -1,12 +1,13 @@
-def flatten_dict(data, keys=[]):
-    if isinstance(data, dict):
-        for key in data:
-            keys.append(key)
-            yield from flatten_dict(data[key], keys)
-            keys.pop()
-    else:
-        keystring = '_'.join(keys)
-        yield keystring, data
+def flatten_dict(data):
+
+    def dfs(data, keys = []):
+        if isinstance(data, dict):
+            for k, v in data.items():
+                yield from dfs(v, keys + [ k ])
+        else:
+            yield '_'.join(keys), data
+
+    yield from dfs(data, [])
 
 
 data = { 'a': { 'b': 'c',  'd': 'e',  'f': { 'g': 'h', 'j': 'k' } },  'i': 'k' }

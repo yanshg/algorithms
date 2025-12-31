@@ -17,46 +17,39 @@ Here is a diagram of the above graph.
 
 '''
 
+from collections import defaultdict
+
 class Graph:
     def __init__(self, maj_list):
-        self.graph = maj_list
-
-        pre = {}
-        suc = {}
-        for i in range(len(maj_list)):
-            pre[i] = set()
-            suc[i] = set()
-
+        self.pre = defaultdict(set)
+        self.suc = defaultdict(set)
         for i, neighs in enumerate(maj_list):
             for j in neighs:
-                suc[i].add(j)
-                pre[j].add(i)
-        
-        self.pre = pre
-        self.suc = suc
+                self.suc[i].add(j)
+                self.pre[j].add(i)
 
-    def __repr(self):
-        return f"graph: {self.graph}, pre: {self.pre}, suc: {self.suc}"
+        self.all_nodes = range(len(maj_list))
 
-def get_safe_nodes(graph):   
-    order = []
-    todo = set()
-    for i in graph.suc:
-        if not graph.suc[i]:
-            todo.add(i)
+    def __repr__(self):
+        return f"pre: {self.pre}, suc: {self.suc}"
 
-    while todo:
-        s = todo.pop()
-        order.append(s)
+    def get_safe_nodes(self):
+        order = []
 
-        for p in graph.pre[s]:
-            graph.suc[p].discard(s)
-            if not graph.suc[p]:
-                todo.add(p)
+        todo = [ t for t in self.all_nodes if not self.suc[t] ]
+        while todo:
+            t = todo.pop()
+            order.append(t)
+
+            for p in self.pre[t]:
+                self.suc[p].discard(t)
+                if not self.suc[p]:
+                    todo.append(p)
     
-    return sorted(order)
+        return sorted(order)
 
 maj_list = [[1,2],[2,3],[5],[0],[5],[],[]]
+safe_nodes = [ 2, 4, 5, 6 ]
 graph = Graph(maj_list)
 print(graph)
-print(get_safe_nodes(graph))
+assert graph.get_safe_nodes() == safe_nodes

@@ -32,18 +32,13 @@ def get_minimal_steps_to_remove_all_balls(balls, hands):
     if not balls:
         return 0
     
-    min_steps = float('inf')
-    counts = Counter(hands)
+    min_inserted = float('inf')
 
-    def collapse(balls, i, j):
-        return balls[:i] + balls[j:]
-    
-    def backtrack(balls, counts, path = []):
-        nonlocal min_steps
+    def backtrack(balls, hand_counts, inserted):
+        nonlocal min_inserted
          
         if not balls:
-            steps = sum(map(len, path)) if path else 0
-            min_steps = min(steps, min_steps)
+            min_inserted = min(inserted, min_inserted)
             return 
 
         i, j = 0, 0
@@ -51,45 +46,40 @@ def get_minimal_steps_to_remove_all_balls(balls, hands):
         while i < n:
             c = balls[i]
             j = i
-            while j < n and balls[j] == balls[i]:
+            while j < n and balls[j] == c:
                 j += 1
             
             need = 3 - (j - i)
-            if need <= 0 or counts[c] >= need:
+            if need <= 0 or hand_counts[c] >= need:
                 # we can collapse the substring containing c from i to j.
+                new_balls = balls[:i] + balls[j:]
                 if need > 0:
-                    counts[c] -= need
-                    path.append(c * need)
-
-                backtrack(collapse(balls, i, j), counts, path)
-
-                if need > 0:
-                    counts[c] += need
-                    path.pop()
+                    backtrack(new_balls, hand_counts - Counter({c:need}), inserted + need)
+                else:
+                    backtrack(new_balls, hand_counts, inserted)
 
             i = j
 
-
-    backtrack(balls, counts, [])
-    return min_steps if min_steps != float('inf') else -1
+    backtrack(balls, Counter(hands), 0)
+    return min_inserted if min_inserted != float('inf') else -1
 
 balls = "WRRBBW"
 hands = "RB"
-print(get_minimal_steps_to_remove_all_balls(balls, hands))
+assert get_minimal_steps_to_remove_all_balls(balls, hands) == -1
 
 balls = "WWRRBBWW"
 hands = "WRBRW"
-print(get_minimal_steps_to_remove_all_balls(balls, hands))
+assert get_minimal_steps_to_remove_all_balls(balls, hands) == 2
 
 balls = "G"
 hands = "GGG"
-print(get_minimal_steps_to_remove_all_balls(balls, hands))
+assert get_minimal_steps_to_remove_all_balls(balls, hands) == 2
 
 
 balls = "GGGGGG"
 hands = "GGG"
-print(get_minimal_steps_to_remove_all_balls(balls, hands))
+assert get_minimal_steps_to_remove_all_balls(balls, hands) == 0
 
 balls = "RBYYBBRRB"
 hands = "YRBGB"
-print(get_minimal_steps_to_remove_all_balls(balls, hands))
+assert get_minimal_steps_to_remove_all_balls(balls, hands) == 3

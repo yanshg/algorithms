@@ -31,29 +31,34 @@ Some examples:
 '''
 
 def check_if_balanced_brackets(s):
-
     pairs = { ')': '(', '}': '{', ']': '[', '>': '<' }
     stack = []
     for c in s:
-        if c in "({[<":
+        if c in pairs.values():
             stack.append(c)
-        elif c in ")}]>":
-            if not stack or stack[-1] != pairs[c]:
+        elif c in pairs.keys():
+            if stack and stack[-1] == pairs[c]:
+                stack.pop()
+            else:
                 return False
-            stack.pop()
     return len(stack) == 0
 
 s = "some string"
+print(s)
 assert check_if_balanced_brackets(s)
 
 s = "[abc(def)gh{i}j]"
+print(s)
 assert check_if_balanced_brackets(s)
 
 s = "abcd(egf))"
+print(s)
 assert not check_if_balanced_brackets(s)
 
 s = ")abcd((egf)"
+print(s)
 assert not check_if_balanced_brackets(s)
 
 s = "(abcd[)]efgh"
+print(s)
 assert not check_if_balanced_brackets(s)

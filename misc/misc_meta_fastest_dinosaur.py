@@ -4,7 +4,7 @@ Using this formula to calculate the speeds of the dinosaurs found in the two fil
 speed = ((STRIDE_LENGTH / LEG_LENGTH) - 1) * SQRT(LEG_LENGTH * 9.8)
 
 
-... write a program that will:
+write a program that will:
 
 
 Take the paths of the two files as inputs
@@ -68,45 +68,36 @@ with open(filename2, mode = 'w') as csv_file:
 import csv
 import math
 
-try:
-    data1 = []
-    with open(filename1, mode = 'r') as csv_file:
-        data1 = list(csv.DictReader(csv_file))
+def calculate_speed(stride_length: float, leg_length: float) -> float:
+    return ((stride_length / leg_length) - 1) * math.sqrt(leg_length * 9.8)
 
-    data2 = []
-    with open(filename2, mode = 'r') as csv_file:
-        data2 = list(csv.DictReader(csv_file))
+def main():
+    try:
+        speeds = []
 
-    dinosaurs = {}
-    speed_data = []
+        leg_lengths = {}
+        with open(filename1, mode = 'r') as csv_file:
+            reader = csv.DictReader(csv_file)
+            for row in reader:
+                leg_lengths[row['NAME']] = float(row['LEG_LENGTH'])
 
-    for dinosaur in data2:
-        name = dinosaur.get('NAME')
-        stride_length = dinosaur.get('STRIDE_LENGTH')
-        stance = dinosaur.get('STANCE')
-        if name and stride_length and stance and stance == 'bipedal':
-            dinosaurs[name] = {}
-            dinosaurs[name]['STRIDE_LENGTH'] = stride_length
+        with open(filename2, mode = 'r') as csv_file:
+            reader = csv.DictReader(csv_file)
+            for row in reader:
+                name = row['NAME']
+                stance = row['STANCE']
+                stride_length = float(row['STRIDE_LENGTH'])
+                if stance == 'bipedal' and name in leg_lengths:
+                    leg_length = leg_lengths[name]
+                    speed = calculate_speed(stride_length, leg_length)
+                    speeds.append( (name, speed) )
 
-    for dinosaur in data1:
-        name = dinosaur.get('NAME')
-        leg_length = dinosaur.get('LEG_LENGTH')
-        if name and name in dinosaurs and leg_length:
-            stride_length = float(dinosaurs[name]['STRIDE_LENGTH'])
-            leg_length = float(leg_length)
-            speed = ((stride_length / leg_length) - 1) * math.sqrt(leg_length * 9.8)
-            speed_data += [ (name, speed) ]
-
-    print(dinosaurs)
-    print(speed_data)
-    if speed_data:
-        for name, _ in sorted(speed_data, key=lambda x: x[1], reverse=True):
+        speeds.sort(key=lambda x: x[1], reverse=True)
+        for name, _ in speeds:
             print(name)
 
-except FileNotFoundError:
-    print("Error: File not found")
-except Exception as e:
-    print(f"Error: {e}")
+    except Exception as e:
+        print(f"Error: {e}")
 
-
-
+if __name__ == "__main__":
+    main()

@@ -16,39 +16,28 @@ from collections import deque
 def is_adjacent(w1,w2):
     if w1 == w2 or len(w1) != len(w2):
         return False
-    return sum([ c1 != c2 for c1,c2 in zip(w1,w2) ])==1
+    return sum([ c1 != c2 for c1,c2 in zip(w1,w2) ]) == 1
 
-# Build graph
-def build_graph(start,words):
-    graph = dict()
-
-    # Note: use | to union sets, instead of +
-    for w1 in {start} | words:
-        graph[w1] = [ w2 for w2 in words if is_adjacent(w1,w2) ]
-
-    return graph
+def get_adjacent_words(word, words):
+    return [ w for w in words if is_adjacent(word, w) ]
 
 # BFS:
 def word_ladder_bfs(start, end, words):
     if end not in words:
         return None
 
-    graph = build_graph(start, words)
-    print("graph:",graph)
-
     visited = set()
     dq = deque([(start, [start])])
 
     while dq:
-        (word,path) = dq.popleft()
-        #print(path)
+        word, path = dq.popleft()
         if word == end:
-            return path
+            return path[:]
 
         visited.add(word)
-        for w in graph[word]:
+        for w in get_adjacent_words(word, words):
             if w not in visited:
-                dq.append((w,path+[w]))
+                dq.append((w, path+[w]))
 
     return None
 
@@ -69,8 +58,6 @@ def word_ladder_bibfs(start,end,words):
     if end not in words:
         return None
 
-    graph = build_graph(start,words)
-
     visited = set()
     q1 = { start: [start] }
     q2 = { end:   [end] }
@@ -89,7 +76,7 @@ def word_ladder_bibfs(start,end,words):
 
             visited.add(word)
 
-            for adj_word in graph[word]:
+            for adj_word in get_adjacent_words(word, words):
                 if adj_word not in visited and  \
                    adj_word not in q3:
                     q3[adj_word] = path + [ adj_word ]

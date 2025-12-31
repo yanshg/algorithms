@@ -29,11 +29,11 @@ def increment_global(thread_id):
 
 threads = []
 for i in range(6):
-    thread = threading.Thread(target=increment_global, args=(i,))
-    thread.start()
-    threads.append(thread)
+    t = threading.Thread(target=increment_global, args=(i,))
+    t.start()
+    threads.append(t)
 
-for thread in threads:
-    thread.join()
+for t in threads:
+    t.join()
 
 print("Final value:", global_variable)

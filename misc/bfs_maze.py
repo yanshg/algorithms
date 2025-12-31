@@ -31,83 +31,47 @@ def maze(matrix, start, dest) -> bool:
     rows = len(matrix)
     cols = len(matrix[0])
 
-    move_directions = {       
-        'left':  (0, -1),
-        'right': (0, 1),
-        'up':    (-1, 0),
-        'down':  (1, 0),
-    }
+    move_directions = [      
+        ('left',  (0, -1)),
+        ('right', (0, 1)),
+        ('up',    (-1, 0)),
+        ('down',  (1, 0)),
+    ]
 
     def is_valid(matrix, point):
         i, j = point
         if 0 <= i < rows and 0 <= j < cols and matrix[i][j] == 0:
             return True
         return False
-    
-    def get_next_point(point, direction):
-        if direction not in move_directions:
-            return point
-        
-        i, j = point
-        di, dj = move_directions[direction]
-        return (i + di, j + dj)
-    
-    def get_neighbor_or_dest_point(matrix, start, dest):       
-        res = []
-
-        for direction in move_directions:    
-            prev = None
-            current = start
-            get_to_dest = False
-            while is_valid(matrix, current):
-                if current == dest:
-                    res += [ (direction, current) ]
-                    get_to_dest = True
-                    break
-                prev = current
-                current = get_next_point(current, direction)
-
-            # if prev is start, means start's next point is not valid
-            if not get_to_dest and prev and prev != start:
-                res += [ (direction, prev) ]
-        
-        return res
-
+      
     # bfs is better than dfs
     # dfs have some additional direction actions 
-    def bfs(matrix, start, dest, res):
+    def bfs(matrix, start, dest):
+        if not is_valid(matrix, start):
+            return
+        
         visited = set()
 
         dq = deque([(start, [])])
         while dq:
-            point, directions = dq.popleft()
+            point, path = dq.popleft()
             if point == dest:
-                res += [ ' '.join(directions) ]
-                return
-
+                return '->'.join(path)
+            
             visited.add(point)
-            for direction, neigh in get_neighbor_or_dest_point(matrix, point, dest):
-                if neigh not in visited:
-                    dq.append((neigh, directions + [direction]))        
-        return
+            for direction, (di, dj) in move_directions:
+                ni, nj = point
+                while is_valid(matrix, (ni + di, nj + dj)):
+                    ni, nj = ni + di, nj + dj
+                    if (ni, nj) == dest:
+                        return '->'.join(path + [direction])
 
-    def dfs(matrix, start, dest, directions, visited=set(), res=[]):
-        if start == dest:
-            res += [ ' '.join(directions) ]
-            return       
-        
-        visited.add(start)
-        for direction, neigh in get_neighbor_or_dest_point(matrix, start, dest):
-            if neigh not in visited:
-                directions.append(direction)
-                dfs(matrix, neigh, dest, directions, visited, res)
-                directions.pop()
-        return
+                if (ni, nj) != point and (ni, nj) not in visited:
+                    dq.append(((ni, nj), path + [direction]))
 
-    res = []
-    #dfs(matrix, start, dest, [], set(), res)
-    bfs(matrix, start, dest, res)
-    return res
+        return ""
+
+    return bfs(matrix, start, dest)
         
 matrix = [ [ 0, 0, 1, 0, 0 ],
            [ 0, 0, 0, 0, 0 ],

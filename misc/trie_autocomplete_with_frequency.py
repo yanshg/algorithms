@@ -22,7 +22,7 @@ class Trie():
             if c == END_FLAG:
                 res += ['']
             else:
-                res += [ c + elem for elem in self._elements(trie) ]
+                res += [ c + elem for elem in self._elements(trie[c]) ]
         return res
 
     def find(self, prefix):
